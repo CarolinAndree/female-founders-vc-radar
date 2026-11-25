@@ -1,0 +1,14 @@
+{
+  "name": "female-founders-vc-radar",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VCs, Angel-Netzwerke und Programme, die in Gründerinnen investieren",
+  "scripts": {
+    "build": "tailwindcss -c tailwind.config.js -i src/input.css -o assets/app.css --minify",
+    "watch": "tailwindcss -c tailwind.config.js -i src/input.css -o assets/app.css --watch",
+    "start": "python3 -m http.server 3344"
+  },
+  "devDependencies": {
+    "tailwindcss": "3.4.16"
+  }
+}
