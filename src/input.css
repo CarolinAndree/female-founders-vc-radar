@@ -38,6 +38,14 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: rgb(var(--pape
   .btn { @apply inline-flex items-center gap-1.5 whitespace-nowrap border border-ink px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] hover:bg-ink hover:text-paper; }
   .btn-accent { @apply border-accent bg-accent text-white hover:bg-ink hover:border-ink hover:text-paper; }
   .field { @apply w-full appearance-none border border-ink/30 bg-transparent px-3 py-2.5 text-sm focus:border-ink focus:outline-none; }
+  /* Schnellfilter: eckige Umschalter */
+  .pill { @apply inline-flex items-center gap-2 whitespace-nowrap border border-ink/40 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] hover:border-ink; }
+  /* Fokus-Kennzeichnung in der Liste */
+  .tag { @apply inline-flex items-center gap-2 whitespace-nowrap border border-ink/25 px-2 py-1 text-xs; }
+  /* Aktiver Filter, mit × löschbar */
+  .chip { @apply inline-flex items-center gap-2 border border-ink bg-ink px-2.5 py-1 font-mono text-[11px] text-paper hover:bg-accent hover:border-accent; }
+  /* Quadratischer Icon-Knopf */
+  .icon-btn { @apply inline-flex h-8 w-8 items-center justify-center border border-ink/30 hover:border-ink hover:bg-ink hover:text-paper; }
   /* Markierung für die Fokus-Kategorie */
   .mark { @apply inline-block h-2.5 w-2.5 shrink-0; }
   .mark-exklusiv { @apply bg-accent; }

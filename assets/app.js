@@ -1,41 +1,20 @@
-// Female Founders VC Radar
-// Läuft komplett im Browser: keine Cookies, kein Speicher, keine Anfragen an andere Server.
+// Seite „Kapital“: VC-Fonds, Angel-Netzwerke, Programme. Nutzt die Bausteine aus common.js.
 (function () {
   'use strict';
+  const { $, esc, liSearch, liCompany, host, extLink, ICON, fillSelect, fact, chipsHtml, nextSort, markSort, actions } = window.RC;
 
-  // ───────── Daten & Zustand ─────────
   const DATA = (window.VC_DATA || []).slice();
   const STAGES = ['Pre-Seed', 'Seed', 'Series A', 'Growth'];
-  const REGION_CYCLE = ['ALL', 'Deutschland', 'Europa', 'WORLD'];
   const REGION_LABEL = {
     ALL: 'Alle', Deutschland: 'Deutschland', Europa: 'Europa (ohne DE)', WORLD: 'Rest der Welt',
     Nordamerika: 'Nordamerika', 'Asien-Pazifik': 'Asien-Pazifik', Afrika: 'Afrika', Weltweit: 'Weltweit (global)'
   };
   // Fokus-Kategorie als typografische Markierung statt Farbfläche
-  const FOCUS_MARK = { 'Exklusiv Gründerinnen': 'mark-exklusiv', 'Gender-Lens': 'mark-lens', 'Diversity': 'mark-diversity' };
+  const FOCUS_MARK = { 'Exklusiv Gründerinnen': 'mark-exklusiv', 'Bevorzugt Frauen': 'mark-lens', 'Diversity': 'mark-diversity' };
 
-  const state = { region: 'ALL', flags: { exclusive: false, email: false }, sort: { key: null, dir: 1 }, open: new Set() };
+  const state = { region: 'ALL', flags: { exclusive: false, email: false }, sort: { key: null, dir: 1 }, open: new Set(), advanced: false };
 
-  // ───────── Helfer ─────────
-  const $ = id => document.getElementById(id);
-  const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  // Nur https- und mailto-Links zulassen (Schutz gegen javascript:-Links in den Daten)
-  const safeUrl = u => (/^(https:\/\/|mailto:)/i.test(String(u || '')) ? esc(u) : '#');
-  const liSearch = q => 'https://www.linkedin.com/search/results/people/?keywords=' + encodeURIComponent(q);
-  const liCompany = q => 'https://www.linkedin.com/search/results/companies/?keywords=' + encodeURIComponent(q);
-  const host = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return u; } };
-  const extLink = (href, cls, inner, title) =>
-    '<a href="' + safeUrl(href) + '" target="_blank" rel="noopener noreferrer"' + (title ? ' title="' + esc(title) + '"' : '') + ' class="' + cls + '">' + inner + '</a>';
-  const pad = n => String(n).padStart(2, '0');
-
-  // ───────── Filter-Auswahl ─────────
-  function fillSelect(id, allLabel, values, labelFn) {
-    const el = $(id), cur = el.value;
-    el.innerHTML = '<option value="ALL">' + esc(allLabel) + '</option>' +
-      values.map(v => '<option value="' + esc(v) + '">' + esc(labelFn ? labelFn(v) : v) + '</option>').join('');
-    if ([...el.options].some(o => o.value === cur)) el.value = cur;
-  }
-
+  // ───────── Filtern & Sortieren ─────────
   function inRegion(d, r) {
     if (r === 'ALL') return true;
     if (r === 'WORLD') return d.region !== 'Deutschland' && d.region !== 'Europa';
@@ -67,7 +46,7 @@
     const { key, dir } = state.sort;
     if (!key) return list;
     const v = d => ({
-      name: d.name.toLowerCase(), region: d.region + d.country,
+      name: d.name.toLowerCase(),
       focus: Object.keys(FOCUS_MARK).indexOf(d.focus), stage: Math.min(...d.stages.map(s => STAGES.indexOf(s))),
       ticket: d.ticket ? 0 : 1
     }[key]);
@@ -75,24 +54,21 @@
   }
 
   // ───────── Bausteine ─────────
-  const focusLabel = d => '<span class="inline-flex items-center gap-2 whitespace-nowrap"><span class="mark ' + (FOCUS_MARK[d.focus] || '') + '"></span>' + esc(d.focus) + '</span>';
+  const focusTag = d => '<span class="tag"><span class="mark ' + (FOCUS_MARK[d.focus] || '') + '"></span>' + esc(d.focus) + '</span>';
   const stageText = d => '<span class="font-mono text-xs">' + d.stages.map(esc).join(' / ') + '</span>';
-  const linkCls = 'font-mono text-[11px] uppercase tracking-[0.1em] underline-offset-4 hover:text-accent hover:underline';
 
-  function contactLinks(d) {
-    const parts = [extLink(d.website, linkCls, 'Web ↗', 'Website: ' + host(d.website))];
-    if (d.email) parts.push(extLink('mailto:' + d.email, linkCls, 'Mail', d.email));
+  function contactIcons(d) {
+    let h = extLink(d.website, 'icon-btn', ICON.web, 'Website: ' + host(d.website));
+    if (d.email) {
+      h += extLink('mailto:' + d.email, 'icon-btn', ICON.mail, 'E-Mail an ' + d.email);
+      h += '<button type="button" class="icon-btn" data-copy="' + esc(d.email) + '" title="E-Mail kopieren" aria-label="E-Mail ' + esc(d.email) + ' kopieren">' + ICON.copy + '</button>';
+    }
     const p = (d.people || [])[0];
-    parts.push(p
-      ? extLink(p.linkedin || liSearch(p.name + ' ' + d.name), linkCls, 'LinkedIn ↗', 'LinkedIn: ' + p.name)
-      : extLink(liCompany(d.name), linkCls, 'LinkedIn ↗', 'LinkedIn-Suche: ' + d.name));
-    return '<div class="flex flex-wrap gap-x-4 gap-y-1">' + parts.join('') + '</div>';
+    h += p
+      ? extLink(p.linkedin || liSearch(p.name + ' ' + d.name), 'icon-btn', ICON.li, 'LinkedIn: ' + p.name)
+      : extLink(liCompany(d.name), 'icon-btn', ICON.li, 'LinkedIn-Suche: ' + d.name);
+    return '<div class="flex flex-wrap gap-1">' + h + '</div>';
   }
-
-  // Zeile einer Definitionsliste: Monospace-Label links, Inhalt rechts, harte Linie oben
-  const fact = (label, value) => value
-    ? '<div class="grid grid-cols-[7rem_1fr] gap-4 border-t border-ink/20 py-2.5 sm:grid-cols-[9rem_1fr]"><dt class="label pt-0.5">' + label + '</dt><dd>' + value + '</dd></div>'
-    : '';
 
   // Aufgeklappter Eintrag: Editorial-Layout aus Text-, Fakten- und Personenspalte
   function details(d) {
@@ -136,65 +112,73 @@
     '</div>';
   }
 
+  function activeFilters() {
+    const out = [];
+    const q = $('searchInput').value.trim();
+    if (q) out.push(['search', 'Suche: ' + q]);
+    if (state.flags.exclusive) out.push(['exclusive', 'Nur Gründerinnen']);
+    if (state.flags.email) out.push(['email', 'Mit E-Mail']);
+    if (state.region !== 'ALL') out.push(['region', REGION_LABEL[state.region] || state.region]);
+    [['fCountry', 'country'], ['fStage', 'stage'], ['fFocus', 'focus'], ['fType', 'type']].forEach(([id, key]) => {
+      const v = $(id).value;
+      if (v !== 'ALL') out.push([key, v]);
+    });
+    return out;
+  }
+
   // ───────── Zeichnen ─────────
   function render() {
     const countries = [...new Set(baseFiltered(true).map(d => d.country))].sort((a, b) => a.localeCompare(b, 'de'));
     fillSelect('fCountry', 'Alle Länder', countries);
     $('fRegion').value = state.region;
 
-    const base = baseFiltered(false);
-    const list = sortList(applyFlags(base));
+    const list = sortList(applyFlags(baseFiltered(false)));
 
-    $('regionTitle').textContent = REGION_LABEL[state.region];
-    $('statTotal').textContent = pad(list.length);
-    $('statTotalSub').textContent = 'von ' + DATA.length + ' Einträgen';
-    $('statExclusive').textContent = pad(base.filter(d => d.focus === 'Exklusiv Gründerinnen').length);
-    $('statEmail').textContent = pad(base.filter(d => d.email).length);
-    ['exclusive', 'email'].forEach(f => $(f + 'Card').classList.toggle('is-active', state.flags[f]));
-    $('regionCard').classList.toggle('is-active', state.region !== 'ALL');
-    document.querySelectorAll('th[data-sort]').forEach(th => {
-      const on = state.sort.key === th.dataset.sort;
-      th.querySelector('.sorti').textContent = on ? (state.sort.dir === 1 ? '↑' : '↓') : '↕';
-      th.classList.toggle('text-ink', on);
-    });
+    $('statTotal').textContent = list.length;
+    $('statLabel').textContent = (list.length === 1 ? 'Eintrag' : 'Einträge') + ' gefunden' + (list.length === DATA.length ? '' : ' von ' + DATA.length);
+    $('pillExclusive').classList.toggle('is-active', state.flags.exclusive);
+    $('pillEmail').classList.toggle('is-active', state.flags.email);
+    document.querySelectorAll('[data-action="setRegion"]').forEach(b => b.classList.toggle('is-active', state.region === b.dataset.arg));
+    $('advFilters').classList.toggle('hidden', !state.advanced);
+    $('advFilters').classList.toggle('grid', state.advanced);
+    $('advToggle').textContent = state.advanced ? 'Weniger Filter −' : 'Weitere Filter +';
+    $('advToggle').setAttribute('aria-expanded', String(state.advanced));
+    markSort(state.sort);
+    $('chips').innerHTML = chipsHtml(activeFilters());
 
     $('emptyState').classList.toggle('hidden', list.length > 0);
     $('tableWrap').classList.toggle('md:block', list.length > 0);
+    $('mobileList').classList.toggle('hidden', list.length === 0);
 
-    $('tbody').innerHTML = list.map((d, i) => {
+    $('tbody').innerHTML = list.map(d => {
       const open = state.open.has(d.id);
       return '<tr data-toggle="' + esc(d.id) + '" class="cursor-pointer border-b border-ink/20 align-top hover:bg-ink/5 ' + (open ? 'open' : '') + '">' +
-          '<td class="py-4 pr-2 font-mono text-xs text-ink/50">' + pad(i + 1) + '</td>' +
-          '<td class="py-4 pr-4"><div class="text-base font-bold leading-tight tracking-tight">' + esc(d.name) + '</div><div class="label mt-1 normal-case tracking-normal">' + esc(d.type) + ' · ' + esc(d.sectors) + '</div></td>' +
-          '<td class="py-4 pr-4 whitespace-nowrap"><div>' + esc(d.country) + '</div><div class="label mt-1 normal-case tracking-normal">' + esc(d.city || d.region) + '</div></td>' +
-          '<td class="py-4 pr-4">' + focusLabel(d) + '</td>' +
+          '<td class="py-4 pr-4"><div class="text-base font-bold leading-tight tracking-tight">' + esc(d.name) + '</div>' +
+            '<div class="mt-1 text-xs text-ink/55">' + esc([d.city, d.country].filter(Boolean).join(', ') || d.region) + ' · ' + esc(d.type) + '</div></td>' +
+          '<td class="py-4 pr-4">' + focusTag(d) + '</td>' +
           '<td class="py-4 pr-4">' + stageText(d) + '</td>' +
           '<td class="py-4 pr-4 max-w-[200px] text-xs">' + (esc(d.ticket) || '<span class="text-ink/35">k. A.</span>') + '</td>' +
-          '<td class="py-4 pr-4">' + contactLinks(d) + '</td>' +
+          '<td class="py-4 pr-4">' + contactIcons(d) + '</td>' +
           '<td class="py-4 text-right font-mono text-lg leading-none"><span class="toggle-sign" aria-hidden="true"></span></td></tr>' +
-        (open ? '<tr class="border-b border-ink"><td></td><td colspan="7">' + details(d) + '</td></tr>' : '');
+        (open ? '<tr class="border-b border-ink"><td colspan="6">' + details(d) + '</td></tr>' : '');
     }).join('');
 
-    $('mobileList').innerHTML = list.map((d, i) => {
+    $('mobileList').innerHTML = list.map(d => {
       const open = state.open.has(d.id);
       return '<article class="border-b border-ink/20 py-5 ' + (open ? 'open' : '') + '">' +
           '<div class="flex cursor-pointer items-start justify-between gap-4" data-toggle="' + esc(d.id) + '">' +
-            '<div class="min-w-0"><p class="font-mono text-xs text-ink/50">' + pad(i + 1) + '</p>' +
-              '<p class="mt-1 text-lg font-bold leading-tight tracking-tight">' + esc(d.name) + '</p>' +
-              '<p class="label mt-1 normal-case tracking-normal">' + esc([d.city, d.country].filter(Boolean).join(', ')) + ' · ' + esc(d.type) + '</p></div>' +
+            '<div class="min-w-0"><p class="text-lg font-bold leading-tight tracking-tight">' + esc(d.name) + '</p>' +
+              '<p class="mt-1 text-xs text-ink/55">' + esc([d.city, d.country].filter(Boolean).join(', ')) + ' · ' + esc(d.type) + '</p></div>' +
             '<span class="toggle-sign font-mono text-xl leading-none" aria-hidden="true"></span>' +
           '</div>' +
-          '<div class="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs">' + focusLabel(d) + stageText(d) + '</div>' +
-          '<div class="mt-3">' + contactLinks(d) + '</div>' +
+          '<div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">' + focusTag(d) + stageText(d) + '</div>' +
+          '<div class="mt-3">' + contactIcons(d) + '</div>' +
           (open ? '<div class="mt-2 border-t border-ink">' + details(d) + '</div>' : '') +
         '</article>';
     }).join('');
   }
 
   // ───────── Aktionen ─────────
-  function openAbout() { $('aboutModal').classList.remove('hidden'); $('aboutModal').classList.add('flex'); }
-  function closeAbout() { $('aboutModal').classList.add('hidden'); $('aboutModal').classList.remove('flex'); }
-
   function exportCSV() {
     const list = sortList(applyFlags(baseFiltered(false)));
     const cols = ['Name', 'Region', 'Land', 'Stadt', 'Art', 'Fokus', 'Kriterium', 'Phasen', 'Ticket', 'Branchen', 'Website', 'E-Mail', 'Ansprechpartner'];
@@ -210,51 +194,51 @@
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }
 
-  const actions = {
-    toggleTheme: () => document.documentElement.classList.toggle('dark'),
-    openAbout, closeAbout, exportCSV,
-    cycleRegion: () => {
-      const i = REGION_CYCLE.indexOf(state.region);
-      state.region = REGION_CYCLE[(i + 1) % REGION_CYCLE.length] || 'ALL';
-      $('fCountry').value = 'ALL';
-      render();
-    },
+  function resetFilters() {
+    $('searchInput').value = '';
+    ['fCountry', 'fStage', 'fFocus', 'fType'].forEach(id => { $(id).value = 'ALL'; });
+    state.region = 'ALL';
+    state.flags.exclusive = false;
+    state.flags.email = false;
+    render();
+  }
+
+  function clearFilter(key) {
+    const sel = { country: 'fCountry', stage: 'fStage', focus: 'fFocus', type: 'fType' }[key];
+    if (key === 'search') $('searchInput').value = '';
+    else if (key === 'region') { state.region = 'ALL'; $('fCountry').value = 'ALL'; }
+    else if (key in state.flags) state.flags[key] = false;
+    else if (sel) $(sel).value = 'ALL';
+    render();
+  }
+
+  Object.assign(actions, {
+    exportCSV, resetFilters,
+    toggleAdvanced: () => { state.advanced = !state.advanced; render(); },
+    setRegion: r => { state.region = state.region === r ? 'ALL' : r; $('fCountry').value = 'ALL'; render(); },
     toggleFlag: f => { if (f in state.flags) { state.flags[f] = !state.flags[f]; render(); } }
-  };
-
-  // ───────── Start ─────────
-  document.querySelectorAll('th[data-sort]').forEach(th => {
-    th.insertAdjacentHTML('beforeend', ' <span class="sorti ml-1">↕</span>');
   });
-  $('updatedText').textContent = 'Stand ' + new Date(window.LAST_UPDATED || Date.now()).toLocaleDateString('de-DE');
-  fillSelect('fRegion', 'Alle', ['Deutschland', 'Europa', 'WORLD', 'Nordamerika', 'Asien-Pazifik', 'Afrika', 'Weltweit'], v => REGION_LABEL[v]);
-  fillSelect('fStage', 'Alle', STAGES);
-  fillSelect('fFocus', 'Alle', Object.keys(FOCUS_MARK));
-  fillSelect('fType', 'Alle', [...new Set(DATA.map(d => d.type))].sort());
 
-  // Ein zentraler Klick-Handler statt Inline-JavaScript (erlaubt eine strenge Content Security Policy)
-  document.addEventListener('click', e => {
-    const modal = $('aboutModal');
-    if (e.target === modal) return closeAbout();
-    const act = e.target.closest('[data-action]');
-    if (act) return Object.prototype.hasOwnProperty.call(actions, act.dataset.action) && actions[act.dataset.action](act.dataset.arg);
+  // Seitenspezifische Klicks: Chip entfernen, sortieren, Zeile aufklappen
+  window.RC.onClick = e => {
+    const clear = e.target.closest('[data-clear]');
+    if (clear) return clearFilter(clear.dataset.clear);
     const th = e.target.closest('th[data-sort]');
-    if (th) {
-      const key = th.dataset.sort;
-      if (state.sort.key !== key) state.sort = { key, dir: 1 };
-      else if (state.sort.dir === 1) state.sort.dir = -1;
-      else state.sort = { key: null, dir: 1 };
-      return render();
-    }
-    if (e.target.closest('a, select, input')) return;
+    if (th) { state.sort = nextSort(state.sort, th.dataset.sort); return render(); }
+    if (e.target.closest('a, select, input, button')) return;
     const row = e.target.closest('[data-toggle]');
     if (row) {
       const id = row.dataset.toggle;
       state.open.has(id) ? state.open.delete(id) : state.open.add(id);
       render();
     }
-  });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeAbout(); });
+  };
+
+  // ───────── Start ─────────
+  fillSelect('fRegion', 'Alle', ['Deutschland', 'Europa', 'WORLD', 'Nordamerika', 'Asien-Pazifik', 'Afrika', 'Weltweit'], v => REGION_LABEL[v]);
+  fillSelect('fStage', 'Alle', STAGES);
+  fillSelect('fFocus', 'Alle', Object.keys(FOCUS_MARK));
+  fillSelect('fType', 'Alle', [...new Set(DATA.map(d => d.type))].sort());
   $('searchInput').addEventListener('input', render);
   $('fRegion').addEventListener('change', e => { state.region = e.target.value; $('fCountry').value = 'ALL'; render(); });
   ['fCountry', 'fStage', 'fFocus', 'fType'].forEach(id => $(id).addEventListener('change', render));

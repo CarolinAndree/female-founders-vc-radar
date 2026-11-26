@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>Expertinnen | Female Founders VC Radar</title>
+  <meta name="description" content="Anwältinnen, Notarinnen und Beraterinnen für Gründung, Finanzierung und Exit. Aufgenommen wird nur, wer zugestimmt hat.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Expertinnen | Female Founders VC Radar">
+  <meta property="og:description" content="Anwältinnen, Notarinnen und Beraterinnen für Gründung, Finanzierung und Exit. Aufgenommen wird nur, wer zugestimmt hat.">
+  <meta property="og:url" content="https://carolinandree.github.io/female-founders-vc-radar/expertinnen.html">
+  <meta property="og:locale" content="de_DE">
+  <link rel="canonical" href="https://carolinandree.github.io/female-founders-vc-radar/expertinnen.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261126c">
+  <!-- Alles lokal: keine Anfragen an Google, CDNs oder andere fremde Server -->
+  <link rel="stylesheet" href="assets/app.css?v=20261126c">
+  <script src="assets/theme.js?v=20261126c"></script>
+</head>
+<body class="min-h-screen antialiased">
+
+  <!-- Kopfzeile -->
+  <header class="border-b border-ink">
+    <div class="mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-4 py-3 sm:px-8">
+      <a href="index.html" class="flex items-center gap-3" aria-label="Female Founders VC Radar, Startseite">
+        <span class="block h-4 w-4 bg-accent" aria-hidden="true"></span>
+        <span class="hidden font-mono text-[11px] uppercase tracking-[0.12em] sm:inline">Female Founders VC Radar</span>
+      </a>
+      <nav class="flex items-center gap-2" aria-label="Hauptnavigation">
+        <span class="label mr-2 hidden lg:inline" id="updatedText"></span>
+        <a href="index.html" class="btn">Kapital</a>
+        <a href="expertinnen.html" class="btn is-active" aria-current="page">Expertinnen</a>
+        <a href="index.html#ueber" class="btn">Über</a>
+        <button type="button" data-action="toggleTheme" class="btn" aria-label="Hell/Dunkel umschalten">◐</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="mx-auto max-w-[1440px] px-4 sm:px-8">
+
+    <!-- Einstieg: Titel links, Erklärung rechts -->
+    <section class="grid grid-cols-12 gap-x-8 gap-y-10 border-b border-ink py-16 sm:py-28">
+      <div class="col-span-12 lg:col-span-8">
+        <h1 class="text-[44px] font-bold leading-[0.95] tracking-[-0.04em] sm:text-7xl lg:text-[96px]">Recht, Notariat<br>&amp; Exit.</h1>
+      </div>
+      <div class="col-span-12 border-t border-ink pt-4 lg:col-span-4 lg:self-end lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+        <p class="label">Expertinnen</p>
+        <p class="mt-4 max-w-sm text-lg leading-relaxed text-ink/75">Wer gründet, finanziert oder verkauft, braucht Anwältinnen, Notarinnen und Beraterinnen. Davon gibt es wenige. Aufgenommen wird nur, wer zugestimmt hat.</p>
+      </div>
+    </section>
+
+    <!-- Suche & Filter: wie beim Kapital-Radar -->
+    <section class="border-b border-ink py-8" aria-label="Suche und Filter">
+      <div class="grid grid-cols-12 gap-x-4 gap-y-4">
+        <label class="col-span-12 md:col-span-7">
+          <span class="label mb-2 block">Suche</span>
+          <input id="searchInput" type="search" placeholder="Name, Stadt, Fachgebiet" class="field">
+        </label>
+        <label class="col-span-7 md:col-span-3">
+          <span class="label mb-2 block">Phase</span>
+          <select id="fPhase" class="field"></select>
+        </label>
+        <div class="col-span-5 flex items-end md:col-span-2">
+          <button type="button" id="advToggle" data-action="toggleAdvanced" class="btn h-[42px] w-full justify-center" aria-expanded="false" aria-controls="advFilters">Weitere Filter +</button>
+        </div>
+      </div>
+
+      <div id="rolePills" class="mt-5 flex flex-wrap items-center gap-2" aria-label="Schnellfilter nach Rolle"></div>
+
+      <div id="advFilters" class="mt-6 hidden grid-cols-12 gap-x-4 gap-y-4 border-t border-ink/20 pt-6">
+        <label class="col-span-6 md:col-span-3"><span class="label mb-2 block">Fachgebiet</span><select id="fField" class="field"></select></label>
+        <label class="col-span-6 md:col-span-3"><span class="label mb-2 block">Ort</span><select id="fCity" class="field"></select></label>
+      </div>
+    </section>
+
+    <!-- Ergebniszeile -->
+    <section class="py-5" aria-label="Ergebnis">
+      <p aria-live="polite"><span id="statTotal" class="font-mono text-2xl font-semibold">0</span> <span id="statLabel" class="text-ink/70">Expertinnen</span></p>
+      <div id="chips" class="mt-3 flex flex-wrap gap-2"></div>
+    </section>
+
+    <!-- Liste: Handy -->
+    <div id="mobileList" class="border-t border-ink md:hidden"></div>
+
+    <!-- Liste: Desktop -->
+    <div id="tableWrap" class="hidden md:block">
+      <table class="w-full border-collapse text-left text-sm">
+        <thead>
+          <tr class="border-y border-ink">
+            <th class="label cursor-pointer select-none py-3 pr-4 font-normal hover:text-ink" data-sort="name">Name &amp; Ort</th>
+            <th class="label cursor-pointer select-none py-3 pr-4 font-normal hover:text-ink" data-sort="role">Rolle</th>
+            <th class="label cursor-pointer select-none py-3 pr-4 font-normal hover:text-ink" data-sort="field">Fachgebiet</th>
+            <th class="label cursor-pointer select-none py-3 pr-4 font-normal hover:text-ink" data-sort="phase">Phase</th>
+            <th class="label py-3 pr-4 font-normal">Kontakt</th>
+            <th class="w-8 py-3"><span class="sr-only">Aufklappen</span></th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+    <div id="emptyState" class="hidden border-y border-ink py-20">
+      <p class="label">0 Treffer</p>
+      <p class="mt-3 text-2xl font-bold tracking-tight">Keine passenden Expertinnen.</p>
+      <button type="button" data-action="resetFilters" class="btn btn-accent mt-6">Alle Filter zurücksetzen</button>
+    </div>
+
+    <p class="max-w-4xl py-6 text-xs leading-relaxed text-ink/55">Angaben ohne Gewähr und ohne Empfehlung. Die Liste ist ein Verzeichnis, keine Bewertung. Jede Expertin ist nur mit ihrer ausdrücklichen Einwilligung aufgenommen und kann sie jederzeit widerrufen. Diese Seite speichert nichts in deinem Browser.</p>
+  </main>
+
+  <footer class="border-t border-ink">
+    <div class="mx-auto flex max-w-[1440px] flex-wrap items-center justify-between gap-3 px-4 py-5 sm:px-8">
+      <span class="label">© SmoochyPod UG (haftungsbeschränkt)</span>
+      <nav class="flex gap-6">
+        <a href="impressum.html" class="label hover:text-accent">Impressum</a>
+        <a href="datenschutz.html" class="label hover:text-accent">Datenschutz</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script src="data/experts.js?v=20261126c"></script>
+  <script src="assets/common.js?v=20261126c"></script>
+  <script src="assets/expertinnen.js?v=20261126c"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 // Swiss Style: zwei Hauptfarben (Papier, Tinte) und eine Akzentfarbe (Signalrot).
 // Hell/Dunkel tauscht nur die CSS-Variablen in src/input.css.
 module.exports = {
-  content: ['./index.html', './impressum.html', './datenschutz.html', './data/vcs.js', './assets/app.js'],
+  content: ['./*.html', './data/*.js', './assets/*.js'],
   darkMode: 'class',
   theme: {
     extend: {
@@ -15,7 +15,7 @@ module.exports = {
         sans: ['"DM Sans"', 'system-ui', '-apple-system', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
       },
-      borderRadius: { none: '0', DEFAULT: '0' }
+      borderRadius: { none: '0', DEFAULT: '0', full: '9999px' } // full nur für das runde Porträt
     }
   }
 };

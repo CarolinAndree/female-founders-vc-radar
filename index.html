@@ -6,31 +6,32 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self'; base-uri 'none'; form-action 'none'">
   <meta name="referrer" content="no-referrer">
   <title>Female Founders VC Radar</title>
-  <meta name="description" content="VC-Fonds, Angel-Netzwerke und Programme, die in Gründerinnen investieren: Deutschland, Europa und weltweit. Mit Phase, Region, Kriterium und Ansprechpartner:innen.">
+  <meta name="description" content="VC-Fonds, Angel-Netzwerke, Programme und Expertinnen für Gründerinnen: Deutschland, Europa und weltweit. Mit Phase, Region, Kriterium und Ansprechpartner:innen.">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Female Founders VC Radar">
-  <meta property="og:description" content="VC-Fonds, Angel-Netzwerke und Programme, die in Gründerinnen investieren: Deutschland, Europa und weltweit. Mit Phase, Region, Kriterium und Ansprechpartner:innen.">
+  <meta property="og:description" content="VC-Fonds, Angel-Netzwerke, Programme und Expertinnen für Gründerinnen: Deutschland, Europa und weltweit. Mit Phase, Region, Kriterium und Ansprechpartner:innen.">
   <meta property="og:url" content="https://carolinandree.github.io/female-founders-vc-radar/">
   <meta property="og:locale" content="de_DE">
   <link rel="canonical" href="https://carolinandree.github.io/female-founders-vc-radar/">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261125d">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261126c">
   <!-- Alles lokal: keine Anfragen an Google, CDNs oder andere fremde Server -->
-  <link rel="stylesheet" href="assets/app.css?v=20261125d">
-  <script src="assets/theme.js?v=20261125d"></script>
+  <link rel="stylesheet" href="assets/app.css?v=20261126c">
+  <script src="assets/theme.js?v=20261126c"></script>
 </head>
 <body class="min-h-screen antialiased">
 
   <!-- Kopfzeile -->
   <header class="border-b border-ink">
-    <div class="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-4 py-3 sm:px-8">
-      <a href="index.html" class="flex items-center gap-3">
+    <div class="mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-4 py-3 sm:px-8">
+      <a href="index.html" class="flex items-center gap-3" aria-label="Female Founders VC Radar, Startseite">
         <span class="block h-4 w-4 bg-accent" aria-hidden="true"></span>
-        <span class="font-mono text-[11px] uppercase tracking-[0.12em]">Female Founders VC Radar</span>
+        <span class="hidden font-mono text-[11px] uppercase tracking-[0.12em] sm:inline">Female Founders VC Radar</span>
       </a>
-      <nav class="flex items-center gap-2">
-        <span class="label hidden md:inline" id="updatedText"></span>
+      <nav class="flex items-center gap-2" aria-label="Hauptnavigation">
+        <span class="label mr-2 hidden lg:inline" id="updatedText"></span>
+        <a href="index.html" class="btn is-active" aria-current="page">Kapital</a>
+        <a href="expertinnen.html" class="btn">Expertinnen</a>
         <button type="button" data-action="openAbout" class="btn">Über</button>
-        <button type="button" data-action="exportCSV" class="btn">CSV ↓</button>
         <button type="button" data-action="toggleTheme" class="btn" aria-label="Hell/Dunkel umschalten">◐</button>
       </nav>
     </div>
@@ -38,70 +39,86 @@
 
   <main class="mx-auto max-w-[1440px] px-4 sm:px-8">
 
-    <!-- Aufmacher: asymmetrisch, 8 + 4 Spalten -->
-    <section class="grid grid-cols-12 gap-x-8 gap-y-10 border-b border-ink py-12 sm:py-20">
-      <div class="col-span-12 lg:col-span-8">
-        <p class="label mb-6">Index / VC-Fonds, Angels, Programme</p>
+    <!-- Einstieg: Aussage und Vergleichsbalken, mit viel Luft -->
+    <section class="grid grid-cols-12 gap-x-8 gap-y-14 border-b border-ink py-16 sm:py-28">
+      <div class="col-span-12 lg:col-span-7">
+        <p class="label mb-6">Index / Kapital &amp; Expertinnen für Gründerinnen</p>
         <h1 class="text-[44px] font-bold leading-[0.95] tracking-[-0.04em] sm:text-7xl lg:text-[96px]">Kapital für<br>Gründerinnen.</h1>
         <p class="mt-8 max-w-xl text-lg leading-relaxed text-ink/75">
-          Investor:innen, die in Gründerinnen investieren oder darauf achten, dass Frauen im Gründungsteam sind. Mit Phase, Region, Kriterium und Ansprechpartner:innen.
+          Investor:innen, die in Gründerinnen investieren oder darauf achten, dass Frauen im Gründungsteam sind. Dazu <a href="expertinnen.html" class="underline underline-offset-4 hover:text-accent">Expertinnen</a> für Verträge, Notariat und Exit.
         </p>
       </div>
-      <aside class="col-span-12 border-t border-ink pt-4 lg:col-span-4 lg:self-end lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-        <p class="label">Deutschland 2025, EY Startup-Barometer</p>
-        <p class="mt-2 font-mono text-[88px] font-semibold leading-none tracking-tight text-accent">1&nbsp;%</p>
-        <p class="mt-3 max-w-xs text-sm leading-relaxed text-ink/75">des Wagniskapitals ging an rein weibliche Gründungsteams. Rein männliche Teams erhielten 94&nbsp;%.</p>
-      </aside>
+
+      <figure class="col-span-12 lg:col-span-5 lg:self-end" aria-labelledby="gapCaption">
+        <p class="label">Wagniskapital Deutschland 2025</p>
+        <p class="mt-3 font-mono text-[88px] font-semibold leading-none tracking-tight text-accent">1&nbsp;%</p>
+        <p class="mt-2 text-sm text-ink/75">ging an rein weibliche Gründungsteams.</p>
+        <!-- Vergleichsbalken: 94 % männlich, Rest gemischt, 1 % weiblich -->
+        <div class="mt-8 flex h-8 w-full border border-ink" role="img" aria-label="94 Prozent rein männliche Teams, etwa 5 Prozent gemischte Teams, 1 Prozent rein weibliche Teams">
+          <div class="h-full w-[94%] bg-ink/15"></div>
+          <div class="h-full w-[5%] border-l border-ink bg-ink/45"></div>
+          <div class="h-full min-w-[6px] flex-1 border-l border-ink bg-accent"></div>
+        </div>
+        <dl class="mt-3 grid grid-cols-3 gap-4 font-mono text-[11px] uppercase tracking-[0.08em]">
+          <div><dt class="text-ink/55">Männlich</dt><dd class="mt-1 text-base font-semibold normal-case tracking-normal">94&nbsp;%</dd></div>
+          <div><dt class="text-ink/55">Gemischt</dt><dd class="mt-1 text-base font-semibold normal-case tracking-normal">ca. 5&nbsp;%</dd></div>
+          <div><dt class="text-accent">Weiblich</dt><dd class="mt-1 text-base font-semibold normal-case tracking-normal text-accent">1&nbsp;%</dd></div>
+        </dl>
+        <figcaption id="gapCaption" class="mt-4 text-xs text-ink/55">Quelle: <a href="https://www.ey.com/de_de/newsroom/2026/03/ey-startup-barometer-2026-gruenderinnen-und-gruender" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 hover:text-accent">EY Startup-Barometer 2026</a>. Gemischte Teams: Rest der Summe.</figcaption>
+      </figure>
     </section>
 
-    <!-- Kennzahlen als Zeile mit harten Trennlinien -->
-    <section class="grid grid-cols-2 border-b border-ink lg:grid-cols-4" aria-label="Kennzahlen und Schnellfilter">
-      <button type="button" id="regionCard" data-action="cycleRegion" class="border-b border-r border-ink p-4 text-left hover:bg-ink/5 sm:p-6 lg:border-b-0">
-        <span class="label block">Region ↻</span>
-        <span id="regionTitle" class="mt-3 block text-2xl font-bold tracking-tight sm:text-3xl">Alle</span>
-        <span class="mt-1 block font-mono text-[11px] text-ink/50">Deutschland / Europa / Welt</span>
-      </button>
-      <div class="border-b border-ink p-4 sm:p-6 lg:border-b-0 lg:border-r">
-        <span class="label block">Treffer</span>
-        <span id="statTotal" class="mt-3 block font-mono text-3xl font-semibold sm:text-4xl">0</span>
-        <span id="statTotalSub" class="mt-1 block font-mono text-[11px] text-ink/50"></span>
+    <!-- Suche & Filter: drei Hauptfilter, der Rest eingeklappt -->
+    <section class="border-b border-ink py-8" aria-label="Suche und Filter">
+      <div class="grid grid-cols-12 gap-x-4 gap-y-4">
+        <label class="col-span-12 md:col-span-7">
+          <span class="label mb-2 block">Suche</span>
+          <input id="searchInput" type="search" placeholder="Name, Stadt, Branche, Stichwort" class="field">
+        </label>
+        <label class="col-span-7 md:col-span-3">
+          <span class="label mb-2 block">Phase</span>
+          <select id="fStage" class="field"></select>
+        </label>
+        <div class="col-span-5 flex items-end md:col-span-2">
+          <button type="button" id="advToggle" data-action="toggleAdvanced" class="btn h-[42px] w-full justify-center" aria-expanded="false" aria-controls="advFilters">Weitere Filter +</button>
+        </div>
       </div>
-      <button type="button" id="exclusiveCard" data-action="toggleFlag" data-arg="exclusive" class="border-r border-ink p-4 text-left hover:bg-ink/5 sm:p-6">
-        <span class="label flex items-center gap-2"><span class="mark mark-exklusiv"></span>Nur Gründerinnen</span>
-        <span id="statExclusive" class="mt-3 block font-mono text-3xl font-semibold text-accent sm:text-4xl">0</span>
-        <span class="mt-1 block font-mono text-[11px] text-ink/50">Klick = Filter</span>
-      </button>
-      <button type="button" id="emailCard" data-action="toggleFlag" data-arg="email" class="p-4 text-left hover:bg-ink/5 sm:p-6">
-        <span class="label block">Mit E-Mail</span>
-        <span id="statEmail" class="mt-3 block font-mono text-3xl font-semibold sm:text-4xl">0</span>
-        <span class="mt-1 block font-mono text-[11px] text-ink/50">Klick = Filter</span>
-      </button>
+
+      <div class="mt-5 flex flex-wrap items-center gap-2" aria-label="Schnellfilter">
+        <button type="button" class="pill" data-action="toggleFlag" data-arg="exclusive" id="pillExclusive"><span class="mark mark-exklusiv"></span>Nur Gründerinnen</button>
+        <button type="button" class="pill" data-action="toggleFlag" data-arg="email" id="pillEmail">Mit E-Mail</button>
+        <span class="mx-1 hidden h-5 border-l border-ink/30 sm:block" aria-hidden="true"></span>
+        <button type="button" class="pill" data-action="setRegion" data-arg="Deutschland">Deutschland</button>
+        <button type="button" class="pill" data-action="setRegion" data-arg="Europa">Europa</button>
+        <button type="button" class="pill" data-action="setRegion" data-arg="WORLD">Welt</button>
+      </div>
+
+      <div id="advFilters" class="mt-6 hidden grid-cols-12 gap-x-4 gap-y-4 border-t border-ink/20 pt-6">
+        <label class="col-span-6 md:col-span-3"><span class="label mb-2 block">Region</span><select id="fRegion" class="field"></select></label>
+        <label class="col-span-6 md:col-span-3"><span class="label mb-2 block">Land</span><select id="fCountry" class="field"></select></label>
+        <label class="col-span-6 md:col-span-3"><span class="label mb-2 block">Fokus</span><select id="fFocus" class="field"></select></label>
+        <label class="col-span-6 md:col-span-3"><span class="label mb-2 block">Art</span><select id="fType" class="field"></select></label>
+      </div>
     </section>
 
-    <!-- Suche & Filter -->
-    <section class="grid grid-cols-12 gap-x-4 gap-y-4 border-b border-ink py-6" aria-label="Suche und Filter">
-      <label class="col-span-12 lg:col-span-4">
-        <span class="label mb-2 block">Suche</span>
-        <input id="searchInput" type="search" placeholder="Fonds, Person, Stadt, Branche" class="field">
-      </label>
-      <label class="col-span-6 lg:col-span-2"><span class="label mb-2 block">Region</span><select id="fRegion" class="field"></select></label>
-      <label class="col-span-6 lg:col-span-2"><span class="label mb-2 block">Land</span><select id="fCountry" class="field"></select></label>
-      <label class="col-span-4 lg:col-span-1"><span class="label mb-2 block">Phase</span><select id="fStage" class="field"></select></label>
-      <label class="col-span-4 lg:col-span-2"><span class="label mb-2 block">Fokus</span><select id="fFocus" class="field"></select></label>
-      <label class="col-span-4 lg:col-span-1"><span class="label mb-2 block">Art</span><select id="fType" class="field"></select></label>
+    <!-- Ergebniszeile: Treffer, Export, aktive Filter -->
+    <section class="py-5" aria-label="Ergebnis">
+      <div class="flex flex-wrap items-baseline justify-between gap-3">
+        <p aria-live="polite"><span id="statTotal" class="font-mono text-2xl font-semibold">0</span> <span id="statLabel" class="text-ink/70">Einträge gefunden</span></p>
+        <button type="button" data-action="exportCSV" class="label underline-offset-4 hover:text-accent hover:underline">Als CSV exportieren ↓</button>
+      </div>
+      <div id="chips" class="mt-3 flex flex-wrap gap-2"></div>
     </section>
 
     <!-- Liste: Handy -->
-    <div id="mobileList" class="md:hidden"></div>
+    <div id="mobileList" class="border-t border-ink md:hidden"></div>
 
     <!-- Liste: Desktop -->
     <div id="tableWrap" class="hidden md:block">
       <table class="w-full border-collapse text-left text-sm">
         <thead>
-          <tr class="border-b border-ink">
-            <th class="label w-14 py-3 pr-2 font-normal">Nr.</th>
-            <th class="label cursor-pointer select-none py-3 pr-4 font-normal hover:text-ink" data-sort="name">Fonds</th>
-            <th class="label cursor-pointer select-none py-3 pr-4 font-normal hover:text-ink" data-sort="region">Region</th>
+          <tr class="border-y border-ink">
+            <th class="label cursor-pointer select-none py-3 pr-4 font-normal hover:text-ink" data-sort="name">Fonds &amp; Ort</th>
             <th class="label cursor-pointer select-none py-3 pr-4 font-normal hover:text-ink" data-sort="focus">Fokus</th>
             <th class="label cursor-pointer select-none py-3 pr-4 font-normal hover:text-ink" data-sort="stage">Phase</th>
             <th class="label cursor-pointer select-none py-3 pr-4 font-normal hover:text-ink" data-sort="ticket">Ticket</th>
@@ -113,20 +130,14 @@
       </table>
     </div>
 
-    <div id="emptyState" class="hidden border-b border-ink py-20">
+    <div id="emptyState" class="hidden border-y border-ink py-20">
       <p class="label">0 Treffer</p>
-      <p class="mt-3 text-2xl font-bold tracking-tight">Keine passenden Fonds.</p>
-      <p class="mt-2 text-ink/60">Filter lockern oder Suche ändern.</p>
+      <p class="mt-3 text-2xl font-bold tracking-tight">Keine passenden Einträge.</p>
+      <button type="button" data-action="resetFilters" class="btn btn-accent mt-6">Alle Filter zurücksetzen</button>
     </div>
 
-    <!-- Legende -->
-    <section class="grid grid-cols-12 gap-x-8 gap-y-3 py-8 text-xs text-ink/60">
-      <p class="label col-span-12 lg:col-span-2">Legende</p>
-      <p class="col-span-12 flex items-center gap-2 sm:col-span-4 lg:col-span-3"><span class="mark mark-exklusiv"></span>Exklusiv Gründerinnen</p>
-      <p class="col-span-12 flex items-center gap-2 sm:col-span-4 lg:col-span-3"><span class="mark mark-lens"></span>Gender-Lens</p>
-      <p class="col-span-12 flex items-center gap-2 sm:col-span-4 lg:col-span-4"><span class="mark mark-diversity"></span>Diversity</p>
-      <p class="col-span-12 lg:col-span-10 lg:col-start-3">Angaben ohne Gewähr. Kriterien, Tickets und Kontaktwege vor dem Pitch auf der Website des Fonds prüfen. E-Mails stehen nur drin, wenn sie öffentlich auf der Fonds-Website stehen. LinkedIn-Links ohne verifiziertes Profil öffnen eine LinkedIn-Suche. Diese Seite speichert nichts in deinem Browser.</p>
-    </section>
+    <p class="max-w-4xl py-6 text-xs leading-relaxed text-ink/55">Angaben ohne Gewähr. Kriterien, Tickets und Kontaktwege vor dem Pitch auf der Website des Fonds prüfen. E-Mails stehen nur drin, wenn sie öffentlich auf der Fonds-Website stehen. LinkedIn-Links ohne verifiziertes Profil öffnen eine LinkedIn-Suche. Diese Seite speichert nichts in deinem Browser.</p>
+
   </main>
 
   <footer class="border-t border-ink">
@@ -139,7 +150,7 @@
     </div>
   </footer>
 
-  <!-- Über den Radar: Seitenblatt mit Raster aus Label- und Textspalte -->
+  <!-- Über den Radar: Seitenblatt von rechts -->
   <div id="aboutModal" class="fixed inset-0 z-50 hidden justify-end bg-black/50" role="dialog" aria-modal="true" aria-labelledby="aboutTitle">
     <div class="flex h-full w-full max-w-2xl flex-col overflow-y-auto border-l border-ink bg-paper">
       <div class="flex items-center justify-between border-b border-ink px-6 py-4 sm:px-10">
@@ -162,7 +173,10 @@
 
         <section class="grid gap-x-8 gap-y-3 border-t border-ink py-6 sm:grid-cols-[8rem_1fr]">
           <p class="label">02 Fokus</p>
-          <p class="leading-relaxed">Der Radar bildet eine kuratierte Liste von VC-Fonds, Angel-Netzwerken und Programmen, die in Gründerinnen investieren oder stark darauf achten, dass Frauen im Gründungsteam sind.</p>
+          <div class="space-y-4 leading-relaxed">
+            <p>Der Radar bildet eine kuratierte Liste von VC-Fonds, Angel-Netzwerken und Programmen, die in Gründerinnen investieren oder stark darauf achten, dass Frauen im Gründungsteam sind. Es zählt, wer gründet und wer entscheidet, nicht nur das Thema. Jeder Eintrag ist öffentlich belegt.</p>
+            <p>Zusätzlich gibt es eine Liste von <a href="expertinnen.html" class="underline underline-offset-4 hover:text-accent">Expertinnen</a>. Denn neben der Finanzierung gibt es viele weitere Themen, die für Startups entscheidend sind: Verträge, Notariat und Exit.</p>
+          </div>
         </section>
 
         <section class="grid gap-x-8 gap-y-3 border-t border-ink py-6 sm:grid-cols-[8rem_1fr]">
@@ -170,15 +184,15 @@
           <div>
             <p class="label mb-2">Fokus</p>
             <dl class="border-t border-ink/20 text-sm">
-              <div class="grid grid-cols-[11rem_1fr] gap-4 border-b border-ink/20 py-2.5"><dt class="flex items-center gap-2 font-semibold"><span class="mark mark-exklusiv"></span>Exklusiv Gründerinnen</dt><dd class="text-ink/75">investiert nur, wenn (mind.) eine Gründerin im Team ist</dd></div>
-              <div class="grid grid-cols-[11rem_1fr] gap-4 border-b border-ink/20 py-2.5"><dt class="flex items-center gap-2 font-semibold"><span class="mark mark-lens"></span>Gender-Lens</dt><dd class="text-ink/75">starker Fokus auf Frauen oder Frauen-Themen (z. B. Women's Health), aber nicht exklusiv</dd></div>
-              <div class="grid grid-cols-[11rem_1fr] gap-4 border-b border-ink/20 py-2.5"><dt class="flex items-center gap-2 font-semibold"><span class="mark mark-diversity"></span>Diversity</dt><dd class="text-ink/75">unterrepräsentierte Gründer:innen allgemein, inkl. Frauen</dd></div>
+              <div class="grid gap-1 border-b border-ink/20 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"><dt class="flex items-center gap-2 font-semibold"><span class="mark mark-exklusiv"></span>Exklusiv Gründerinnen</dt><dd class="text-ink/75">investiert nur, wenn (mind.) eine Gründerin im Team ist</dd></div>
+              <div class="grid gap-1 border-b border-ink/20 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"><dt class="flex items-center gap-2 font-semibold"><span class="mark mark-lens"></span>Bevorzugt Frauen</dt><dd class="text-ink/75">Frauen entscheiden als Investorinnen, oder Gründerinnen werden klar bevorzugt, aber ohne feste Regel</dd></div>
+              <div class="grid gap-1 border-b border-ink/20 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"><dt class="flex items-center gap-2 font-semibold"><span class="mark mark-diversity"></span>Diversity</dt><dd class="text-ink/75">unterrepräsentierte Gründer:innen allgemein, inkl. Frauen</dd></div>
             </dl>
             <p class="label mb-2 mt-6">Art</p>
             <dl class="border-t border-ink/20 text-sm">
-              <div class="grid grid-cols-[11rem_1fr] gap-4 border-b border-ink/20 py-2.5"><dt class="font-semibold">VC-Fonds</dt><dd class="text-ink/75">investiert Eigenkapital aus einem Fonds</dd></div>
-              <div class="grid grid-cols-[11rem_1fr] gap-4 border-b border-ink/20 py-2.5"><dt class="font-semibold">Angel-Netzwerk</dt><dd class="text-ink/75">Business Angels, die einzeln oder gemeinsam investieren</dd></div>
-              <div class="grid grid-cols-[11rem_1fr] gap-4 border-b border-ink/20 py-2.5"><dt class="font-semibold">Programm</dt><dd class="text-ink/75">Accelerator, Förderprogramm oder Grant, meist ohne Beteiligung</dd></div>
+              <div class="grid gap-1 border-b border-ink/20 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"><dt class="font-semibold">VC-Fonds</dt><dd class="text-ink/75">investiert Eigenkapital aus einem Fonds</dd></div>
+              <div class="grid gap-1 border-b border-ink/20 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"><dt class="font-semibold">Angel-Netzwerk</dt><dd class="text-ink/75">Business Angels, die einzeln oder gemeinsam investieren</dd></div>
+              <div class="grid gap-1 border-b border-ink/20 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"><dt class="font-semibold">Programm</dt><dd class="text-ink/75">Accelerator, Förderprogramm oder Grant, meist ohne Beteiligung</dd></div>
             </dl>
           </div>
         </section>
@@ -186,8 +200,11 @@
         <section class="grid gap-x-8 gap-y-3 border-t border-ink py-6 sm:grid-cols-[8rem_1fr]">
           <p class="label">04 Von</p>
           <div class="space-y-4">
-            <p class="text-xl font-bold tracking-tight">Zusammengestellt von Carolin Andree</p>
-            <p class="leading-relaxed">Hi, ich bin Carolin. Ich habe selbst ein Startup in einem diversen Team mitaufgebaut und erfolgreich verkauft. Ich habe diesen Radar gebaut. Du kennst einen Fonds, der fehlt, oder hast eine Korrektur? Schreib mir gern auf LinkedIn.</p>
+            <div class="flex items-center gap-4">
+              <img src="assets/img/carolin.jpg?v=20261126d" alt="Carolin Andree" width="64" height="64" class="h-16 w-16 shrink-0 rounded-full border border-ink object-cover">
+              <p class="text-xl font-bold leading-tight tracking-tight">Zusammengestellt von Carolin Andree</p>
+            </div>
+            <p class="leading-relaxed">Hi, ich bin Carolin. Ich habe selbst ein Startup in einem diversen Team mitaufgebaut und erfolgreich verkauft. Ich habe diesen Radar gebaut. Du kennst einen Fond, der fehlt, oder bist selbst Expertin? Dann schreib mir gern auf LinkedIn.</p>
             <a href="https://www.linkedin.com/in/carolinandree/" target="_blank" rel="noopener noreferrer" class="btn btn-accent">Carolin auf LinkedIn ↗</a>
           </div>
         </section>
@@ -195,7 +212,8 @@
     </div>
   </div>
 
-  <script src="data/vcs.js?v=20261125d"></script>
-  <script src="assets/app.js?v=20261125d"></script>
+  <script src="data/vcs.js?v=20261126c"></script>
+  <script src="assets/common.js?v=20261126c"></script>
+  <script src="assets/app.js?v=20261126c"></script>
 </body>
 </html>

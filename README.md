@@ -6,7 +6,7 @@
 
 [Live ansehen](https://carolinandree.github.io/female-founders-vc-radar/)
 
-![Fonds](https://img.shields.io/badge/Fonds_%26_Programme-45-111111)
+![Fonds](https://img.shields.io/badge/Fonds_%26_Programme-39-111111)
 ![Cookies](https://img.shields.io/badge/Cookies-keine-111111)
 ![Tracking](https://img.shields.io/badge/Tracking-keins-111111)
 ![Lizenz](https://img.shields.io/badge/Lizenz-MIT-e2231a)
@@ -41,7 +41,7 @@ Es gibt Investor:innen, die das ändern wollen, aber sie sind schwer zu finden. 
 | Fokus | Bedeutung |
 |---|---|
 | **Exklusiv Gründerinnen** | investiert nur, wenn (mind.) eine Gründerin im Team ist |
-| **Gender-Lens** | starker Fokus auf Frauen oder Frauen-Themen (z. B. Women's Health), aber nicht exklusiv |
+| **Bevorzugt Frauen** | Frauen entscheiden als Investorinnen, oder Gründerinnen werden klar bevorzugt, aber ohne feste Regel |
 | **Diversity** | unterrepräsentierte Gründer:innen allgemein, inkl. Frauen |
 
 **Art** (welche Form von Unterstützung):
@@ -77,22 +77,31 @@ Alle Einträge stehen in [`data/vcs.js`](data/vcs.js). Neuen Eintrag anlegen: vo
 
 Regeln für Einträge:
 
+- **Es zählt, wer gründet und wer entscheidet:** Fonds, die nur in Frauen-Themen investieren (z. B. Women's Health), ohne Gründerinnen zu bevorzugen, werden nicht aufgenommen.
 - **Quelle angeben:** Die Angaben müssen öffentlich überprüfbar sein (Website des Fonds, Pressemitteilung, Fachpresse).
 - **E-Mail** nur, wenn sie öffentlich auf der Website des Fonds steht.
 - **LinkedIn-Profil** nur, wenn es eindeutig zur Person gehört, sonst weglassen, die Seite erzeugt dann eine Suche.
-- **Fokus:** `Exklusiv Gründerinnen` · `Gender-Lens` · `Diversity`
+- **Fokus:** `Exklusiv Gründerinnen` · `Bevorzugt Frauen` · `Diversity`
 - **Region:** `Deutschland` · `Europa` · `Nordamerika` · `Asien-Pazifik` · `Afrika` · `Weltweit`
 - **Art:** `VC-Fonds` · `Angel-Netzwerk` · `Programm`
+
+## Expertinnen
+
+Anwältinnen, Notarinnen und Beraterinnen für Gründung, Finanzierung und Exit haben eine eigene Seite (`expertinnen.html`) und stehen in [`data/experts.js`](data/experts.js). **Einzelpersonen werden nur mit ihrer ausdrücklichen Einwilligung aufgenommen**, das Datum steht im Feld `consent`. Die Kanzlei wird erst eingetragen, wenn die Person sie bestätigt hat.
 
 ## Projektstruktur
 
 ```
-├── index.html          Der Radar
+├── index.html          Kapital-Radar (Fonds, Angels, Programme)
+├── expertinnen.html    Expertinnen (Recht, Notariat, Exit)
 ├── impressum.html      Impressum
 ├── datenschutz.html    Datenschutzerklärung
 ├── data/vcs.js         Alle Fonds & Programme (hier pflegen)
+├── data/experts.js     Expertinnen (nur mit Einwilligung)
 ├── assets/
-│   ├── app.js          Logik (Filter, Suche, Sortierung, Export)
+│   ├── common.js       Gemeinsame Bausteine (Links, Icons, Filter-Chips, Über-Blatt)
+│   ├── app.js          Logik Kapital-Radar (Filter, Suche, Sortierung, Export)
+│   ├── expertinnen.js  Logik Expertinnen-Seite
 │   ├── theme.js        Hell/Dunkel nach Systemeinstellung
 │   ├── app.css         Gebautes CSS (Tailwind)
 │   └── fonts/          DM Sans, JetBrains Mono
@@ -110,7 +119,7 @@ npm run build
 
 Neue Fonds in `data/vcs.js` brauchen keinen Neubau.
 
-Nach Änderungen an CSS, JavaScript oder Daten die Versionsnummer `?v=…` in den drei HTML-Dateien erhöhen (z. B. auf das aktuelle Datum). Dann laden Browser die neue Fassung statt einer zwischengespeicherten.
+Nach Änderungen an CSS, JavaScript oder Daten die Versionsnummer `?v=…` in den vier HTML-Dateien erhöhen (z. B. auf das aktuelle Datum). Dann laden Browser die neue Fassung statt einer zwischengespeicherten.
 
 ## Veröffentlichen
 

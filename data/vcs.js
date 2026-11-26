@@ -7,11 +7,11 @@
 //   region:  "Deutschland" | "Europa" | "Nordamerika" | "Afrika" | "Asien-Pazifik" | "Weltweit"
 //   type:    "VC-Fonds" | "Angel-Netzwerk" | "Programm"
 //   focus:   "Exklusiv Gründerinnen"  = investiert nur, wenn (mind.) eine Gründerin im Team ist
-//            "Gender-Lens"            = starker Fokus auf Frauen / Frauen-Themen, aber nicht exklusiv
+//            "Bevorzugt Frauen"       = Frauen entscheiden als Investorinnen, oder Gründerinnen werden klar bevorzugt (ohne feste Regel)
 //            "Diversity"              = unterrepräsentierte Gründer:innen allgemein (inkl. Frauen)
 //   stages:  ["Pre-Seed","Seed","Series A","Growth"]
 
-window.LAST_UPDATED = "2026-11-24";
+window.LAST_UPDATED = "2026-11-26";
 
 window.VC_DATA = [
   // ───────────────────────── DEUTSCHLAND ─────────────────────────
@@ -53,7 +53,7 @@ window.VC_DATA = [
     website: "https://female-investors.network/",
     contactUrl: "",
     region: "Deutschland", country: "Deutschland", city: "",
-    type: "Angel-Netzwerk", focus: "Gender-Lens",
+    type: "Angel-Netzwerk", focus: "Bevorzugt Frauen",
     criterion: "Netzwerk von Business Angels (Investorinnen), investiert bevorzugt in diverse Teams",
     stages: ["Pre-Seed", "Seed"],
     ticket: "Angel-Tickets",
@@ -69,7 +69,7 @@ window.VC_DATA = [
     website: "https://www.business-angels.de/",
     contactUrl: "https://www.business-angels.de/posts/wo-men-investors-alliance-staerkt-diversitaet-in-der-fruehphasenfinanzierung-261/",
     region: "Deutschland", country: "Deutschland", city: "",
-    type: "Programm", focus: "Gender-Lens",
+    type: "Programm", focus: "Bevorzugt Frauen",
     criterion: "Allianz u. a. aus BAND, encourageventures, FIN, VdU, HTGF, mit Pitch-Events wie „Female Funding“",
     stages: ["Pre-Seed", "Seed"],
     ticket: "Angel-Tickets über Partner-Netzwerke",
@@ -161,7 +161,7 @@ window.VC_DATA = [
     website: "https://www.revaia.com/",
     contactUrl: "",
     region: "Europa", country: "Frankreich", city: "Paris",
-    type: "VC-Fonds", focus: "Gender-Lens",
+    type: "VC-Fonds", focus: "Bevorzugt Frauen",
     criterion: "Von Frauen gegründeter Growth-Fonds mit ESG- & Diversity-Fokus (nicht exklusiv)",
     stages: ["Growth"],
     ticket: "",
@@ -210,28 +210,12 @@ window.VC_DATA = [
     description: "2016 als einer der ersten von Frauen gegründeten VCs Europas gestartet."
   },
   {
-    id: "gg-ventures",
-    name: "GG Ventures (Goddess Gaia)",
-    website: "https://goddessgaiaventures.com/",
-    contactUrl: "",
-    region: "Europa", country: "Großbritannien", city: "London",
-    type: "VC-Fonds", focus: "Gender-Lens",
-    criterion: "Frauengesundheit & Female Performance (Thema, nicht Gründerinnen-Quote)",
-    stages: ["Pre-Seed", "Seed"],
-    ticket: "",
-    sectors: "FemTech, Women's Health, Sport, Longevity",
-    fundSize: "",
-    email: "",
-    people: [],
-    description: "Europas erste Plattform speziell für Women's Health & Female Performance."
-  },
-  {
     id: "wa4steam",
     name: "WA4STEAM: Women Angels for STEAM",
     website: "https://wa4steam.com/",
     contactUrl: "",
     region: "Europa", country: "Spanien", city: "Barcelona",
-    type: "Angel-Netzwerk", focus: "Gender-Lens",
+    type: "Angel-Netzwerk", focus: "Bevorzugt Frauen",
     criterion: "Investorinnen-Netzwerk, investiert in STEAM-Startups mit Frauen im Team",
     stages: ["Pre-Seed", "Seed"],
     ticket: "Angel-Tickets",
@@ -289,22 +273,6 @@ window.VC_DATA = [
     people: [],
     description: "Ökosystem aus Programmen, Angel-Netzwerk und Fonds. Über „Get on the Radar“ auf der Website bewerben."
   },
-  {
-    id: "privilege",
-    name: "Privilège Ventures",
-    website: "https://www.privilege-ventures.com/",
-    contactUrl: "",
-    region: "Europa", country: "Schweiz", city: "Lugano",
-    type: "VC-Fonds", focus: "Gender-Lens",
-    criterion: "2022: CHF-20-Mio.-Fonds für von Frauen geführte Startups (CH, IT, FR, DE); heute Fokus HealthTech/MedTech",
-    stages: ["Pre-Seed", "Seed"],
-    ticket: "ca. $ 250k Erstinvestment (2022)",
-    sectors: "HealthTech, MedTech, Longevity",
-    fundSize: "CHF 20 Mio.",
-    email: "hello@privilege-ventures.com",
-    people: [{ name: "Jacqueline Ruedin Rüsch", role: "Founding Partner" }],
-    description: "Erster von Frauen geführter VC der Schweiz. Die aktuelle Website betont HealthTech statt Gründerinnen, Fokus vor dem Pitch prüfen."
-  },
 
   // ───────────────────────── PROGRAMME (Europa & weltweit) ─────────────────────────
   {
@@ -338,22 +306,6 @@ window.VC_DATA = [
     email: "",
     people: [],
     description: "Programm des European Innovation Council inkl. Mentoring & Coaching. Wöchentliche Cut-offs (dienstags 17 Uhr) bis voraussichtlich Sommer 2027. Fristen auf der offiziellen Seite prüfen."
-  },
-  {
-    id: "google-women-founders",
-    name: "Google for Startups Accelerator: Women Founders",
-    website: "https://startup.google.com/programs/accelerator/",
-    contactUrl: "",
-    region: "Europa", country: "Europa & Israel", city: "",
-    type: "Programm", focus: "Exklusiv Gründerinnen",
-    criterion: "Tech-Startups mit Gründerin, Umsatz vorhanden, Sitz in Europa/UK/Israel",
-    stages: ["Seed", "Series A"],
-    ticket: "equity-free (kein Geld, Programm)",
-    sectors: "Tech, AI",
-    fundSize: "",
-    email: "",
-    people: [],
-    description: "10-wöchiges hybrides Accelerator-Programm. Letzte gefundene Bewerbungsrunde: Anfang 2025, aktuellen Stand prüfen."
   },
   {
     id: "female-foundry",
@@ -420,22 +372,6 @@ window.VC_DATA = [
     email: "hello@femalefoundersfund.com",
     people: [{ name: "Anu Duggal", role: "Founding Partner" }],
     description: "Einer der bekanntesten Gründerinnen-Fonds weltweit (seit 2014)."
-  },
-  {
-    id: "bbg-ventures",
-    name: "BBG Ventures",
-    website: "https://www.bbgventures.com/",
-    contactUrl: "",
-    region: "Nordamerika", country: "USA", city: "New York",
-    type: "VC-Fonds", focus: "Gender-Lens",
-    criterion: "Historisch: mind. eine Gründerin; heute „deep tech & deep humanity“",
-    stages: ["Pre-Seed", "Seed"],
-    ticket: "",
-    sectors: "Deep Tech, Consumer, Health",
-    fundSize: "",
-    email: "hello@bbgventures.com",
-    people: [{ name: "Nisha Dua", role: "Co-Founder & General Partner" }],
-    description: "Hat lange nur Teams mit mind. einer Gründerin finanziert; aktuelle These auf der Website prüfen."
   },
   {
     id: "halogen",
@@ -539,8 +475,8 @@ window.VC_DATA = [
     website: "https://www.theartemisfund.com/",
     contactUrl: "",
     region: "Nordamerika", country: "USA", city: "Houston",
-    type: "VC-Fonds", focus: "Gender-Lens",
-    criterion: "Fokus auf Gründerinnen in Fintech, Commerce & Care",
+    type: "VC-Fonds", focus: "Bevorzugt Frauen",
+    criterion: "Von Frauen geführter Fonds, führt Seed-Runden für Gründerinnen in Fintech, Commerce & Care",
     stages: ["Seed"],
     ticket: "",
     sectors: "Fintech, Commerce, Care",
@@ -587,7 +523,7 @@ window.VC_DATA = [
     website: "https://www.astia.org/",
     contactUrl: "",
     region: "Nordamerika", country: "USA", city: "San Francisco",
-    type: "Angel-Netzwerk", focus: "Gender-Lens",
+    type: "Angel-Netzwerk", focus: "Bevorzugt Frauen",
     criterion: "Inklusive Teams mit Frauen in Führungsrollen",
     stages: ["Seed", "Series A"],
     ticket: "",
@@ -619,7 +555,7 @@ window.VC_DATA = [
     website: "https://portfolia.co/",
     contactUrl: "",
     region: "Nordamerika", country: "USA", city: "",
-    type: "VC-Fonds", focus: "Gender-Lens",
+    type: "VC-Fonds", focus: "Bevorzugt Frauen",
     criterion: "Fonds von & für Investorinnen, u. a. FemTech-Fonds",
     stages: ["Seed", "Series A"],
     ticket: "",
@@ -628,38 +564,6 @@ window.VC_DATA = [
     email: "",
     people: [],
     description: "Community aus 2.000+ Investorinnen."
-  },
-  {
-    id: "amboy-street",
-    name: "Amboy Street Ventures",
-    website: "https://www.amboystreet.vc/",
-    contactUrl: "",
-    region: "Nordamerika", country: "USA", city: "",
-    type: "VC-Fonds", focus: "Gender-Lens",
-    criterion: "Women's Health & Sexual Wellbeing (Thema)",
-    stages: ["Pre-Seed", "Seed"],
-    ticket: "",
-    sectors: "Fertility, Menopause, Maternal & Sexual Health",
-    fundSize: "",
-    email: "",
-    people: [],
-    description: "Nach eigener Aussage erster VC weltweit mit Fokus auf Women's Health & Sexual Wellbeing."
-  },
-  {
-    id: "coyote",
-    name: "Coyote Ventures",
-    website: "https://coyote.vc/",
-    contactUrl: "",
-    region: "Nordamerika", country: "USA", city: "",
-    type: "VC-Fonds", focus: "Gender-Lens",
-    criterion: "Women's Health & Wellness",
-    stages: ["Pre-Seed", "Seed"],
-    ticket: "",
-    sectors: "Women's Health",
-    fundSize: "",
-    email: "",
-    people: [],
-    description: ""
   },
   {
     id: "standup",
@@ -751,7 +655,7 @@ window.VC_DATA = [
     website: "https://www.janngo.com/",
     contactUrl: "",
     region: "Afrika", country: "Afrika (pan-afrikanisch)", city: "",
-    type: "VC-Fonds", focus: "Gender-Lens",
+    type: "VC-Fonds", focus: "Bevorzugt Frauen",
     criterion: "> 50 % des Portfolios von Frauen geführt",
     stages: ["Seed", "Series A"],
     ticket: "",
