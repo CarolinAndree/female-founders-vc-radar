@@ -10,7 +10,7 @@
     Nordamerika: 'Nordamerika', 'Asien-Pazifik': 'Asien-Pazifik', Afrika: 'Afrika', Weltweit: 'Weltweit (global)'
   };
   // Fokus-Kategorie als typografische Markierung statt Farbfläche
-  const FOCUS_MARK = { 'Exklusiv Gründerinnen': 'mark-exklusiv', 'Bevorzugt Frauen': 'mark-lens', 'Diversity': 'mark-diversity' };
+  const FOCUS_MARK = { 'Nur Gründerinnen': 'mark-nur', 'Gründerinnen-Quote': 'mark-quote' };
 
   const state = { region: 'ALL', flags: { exclusive: false, email: false }, sort: { key: null, dir: 1 }, open: new Set(), advanced: false };
 
@@ -40,7 +40,7 @@
   }
 
   const applyFlags = list => list.filter(d =>
-    (!state.flags.exclusive || d.focus === 'Exklusiv Gründerinnen') && (!state.flags.email || d.email));
+    (!state.flags.exclusive || d.focus === 'Nur Gründerinnen') && (!state.flags.email || d.email));
 
   function sortList(list) {
     const { key, dir } = state.sort;
@@ -98,6 +98,7 @@
         '<dl class="border-b border-ink/20">' +
           fact('Standort', esc([d.city, d.country].filter(Boolean).join(', '))) +
           fact('Art', esc(d.type)) +
+          fact('Gründerinnen-Quote', esc(d.quota)) +
           fact('Phase', esc(d.stages.join(' / '))) +
           fact('Branchen', esc(d.sectors)) +
           fact('Ticket', esc(d.ticket)) +
@@ -181,10 +182,10 @@
   // ───────── Aktionen ─────────
   function exportCSV() {
     const list = sortList(applyFlags(baseFiltered(false)));
-    const cols = ['Name', 'Region', 'Land', 'Stadt', 'Art', 'Fokus', 'Kriterium', 'Phasen', 'Ticket', 'Branchen', 'Website', 'E-Mail', 'Ansprechpartner'];
+    const cols = ['Name', 'Region', 'Land', 'Stadt', 'Art', 'Fokus', 'Kriterium', 'Gründerinnen-Quote', 'Phasen', 'Ticket', 'Branchen', 'Website', 'E-Mail', 'Ansprechpartner'];
     // Schutz vor Formel-Injection in Excel: Zellen, die (nach Leerzeichen) mit = + - @ | beginnen, werden entschärft
     const q = v => { let s = String(v ?? ''); if (/^[\s]*[=+\-@|]/.test(s)) s = "'" + s; return '"' + s.replace(/"/g, '""') + '"'; };
-    const rows = list.map(d => [d.name, d.region, d.country, d.city, d.type, d.focus, d.criterion, d.stages.join(' / '), d.ticket, d.sectors, d.website, d.email,
+    const rows = list.map(d => [d.name, d.region, d.country, d.city, d.type, d.focus, d.criterion, d.quota, d.stages.join(' / '), d.ticket, d.sectors, d.website, d.email,
       (d.people || []).map(p => p.name + ' (' + p.role + ')').join('; ')].map(q).join(';'));
     const blob = new Blob(['﻿' + [cols.map(q).join(';'), ...rows].join('\n')], { type: 'text/csv;charset=utf-8' });
     const a = document.createElement('a');

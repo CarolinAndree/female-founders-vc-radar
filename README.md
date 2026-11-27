@@ -4,9 +4,9 @@
 
 **VC-Fonds, Angel-Netzwerke und Programme, die in Gründerinnen investieren: Deutschland, Europa & weltweit.**
 
-[Live ansehen](https://carolinandree.github.io/female-founders-vc-radar/)
+[Live ansehen](https://gruenderinnen-radar.de/)
 
-![Fonds](https://img.shields.io/badge/Fonds_%26_Programme-39-111111)
+![Fonds](https://img.shields.io/badge/Fonds_%26_Programme-33-111111)
 ![Cookies](https://img.shields.io/badge/Cookies-keine-111111)
 ![Tracking](https://img.shields.io/badge/Tracking-keins-111111)
 ![Lizenz](https://img.shields.io/badge/Lizenz-MIT-e2231a)
@@ -17,7 +17,7 @@
 
 ## Warum?
 
-Laut [EY Startup-Barometer](https://www.ey.com/de_de/newsroom/2026/03/ey-startup-barometer-2026-gruenderinnen-und-gruender) flossen 2025 in Deutschland rund **94 %** des Wagniskapitals an rein männliche Gründungsteams. Rein weibliche Teams erhielten etwa **1 %**, also 53 Mio. € von insgesamt 7,8 Mrd. €.
+Laut [EY Startup-Barometer](https://www.ey.com/de_de/newsroom/2026/03/ey-startup-barometer-2026-gruenderinnen-und-gruender) flossen 2025 in Deutschland rund **94 %** des Wagniskapitals an rein männliche Gründungsteams. Rein weibliche Teams erhielten etwa **1 %**, also 53 Mio. € von insgesamt 7,8 Mrd. €. Damit liegt Deutschland sogar unter dem europäischen Schnitt: Europaweit gingen 2024 laut [EU-Kommission](https://op.europa.eu/en/publication-detail/-/publication/44c1e585-272f-11f1-a7dd-01aa75ed71a1) immerhin **2,5 %** an rein weibliche Teams.
 
 Es gibt Investor:innen, die das ändern wollen, aber sie sind schwer zu finden. Der Radar sammelt sie an einem Ort: mit Website, Phase, Region, Investment-Kriterium und Ansprechpartner:innen.
 
@@ -40,9 +40,10 @@ Es gibt Investor:innen, die das ändern wollen, aber sie sind schwer zu finden. 
 
 | Fokus | Bedeutung |
 |---|---|
-| **Exklusiv Gründerinnen** | investiert nur, wenn (mind.) eine Gründerin im Team ist |
-| **Bevorzugt Frauen** | Frauen entscheiden als Investorinnen, oder Gründerinnen werden klar bevorzugt, aber ohne feste Regel |
-| **Diversity** | unterrepräsentierte Gründer:innen allgemein, inkl. Frauen |
+| **Nur Gründerinnen** | investiert nur, wenn mindestens eine Frau zum Gründungsteam gehört |
+| **Gründerinnen-Quote** | mindestens 30 % der Unternehmen im Portfolio haben eine Gründerin, öffentlich belegt |
+
+30 % gilt als kritische Masse. Fonds, die nur allgemein „Diversity“ versprechen, ohne eine Quote zu belegen, und Netzwerke, die nicht selbst investieren, werden nicht aufgenommen.
 
 **Art** (welche Form von Unterstützung):
 
@@ -81,7 +82,7 @@ Regeln für Einträge:
 - **Quelle angeben:** Die Angaben müssen öffentlich überprüfbar sein (Website des Fonds, Pressemitteilung, Fachpresse).
 - **E-Mail** nur, wenn sie öffentlich auf der Website des Fonds steht.
 - **LinkedIn-Profil** nur, wenn es eindeutig zur Person gehört, sonst weglassen, die Seite erzeugt dann eine Suche.
-- **Fokus:** `Exklusiv Gründerinnen` · `Bevorzugt Frauen` · `Diversity`
+- **Fokus:** `Nur Gründerinnen` · `Gründerinnen-Quote`
 - **Region:** `Deutschland` · `Europa` · `Nordamerika` · `Asien-Pazifik` · `Afrika` · `Weltweit`
 - **Art:** `VC-Fonds` · `Angel-Netzwerk` · `Programm`
 
@@ -96,6 +97,8 @@ Anwältinnen, Notarinnen und Beraterinnen für Gründung, Finanzierung und Exit 
 ├── expertinnen.html    Expertinnen (Recht, Notariat, Exit)
 ├── impressum.html      Impressum
 ├── datenschutz.html    Datenschutzerklärung
+├── robots.txt          Hinweis für Suchmaschinen
+├── sitemap.xml         Seitenliste für Google & Bing
 ├── data/vcs.js         Alle Fonds & Programme (hier pflegen)
 ├── data/experts.js     Expertinnen (nur mit Einwilligung)
 ├── assets/
@@ -104,7 +107,8 @@ Anwältinnen, Notarinnen und Beraterinnen für Gründung, Finanzierung und Exit 
 │   ├── expertinnen.js  Logik Expertinnen-Seite
 │   ├── theme.js        Hell/Dunkel nach Systemeinstellung
 │   ├── app.css         Gebautes CSS (Tailwind)
-│   └── fonts/          DM Sans, JetBrains Mono
+│   ├── fonts/          DM Sans, JetBrains Mono
+│   └── img/            Porträt, Vorschaubild für Links (og.png)
 └── src/input.css       Quelle für assets/app.css
 ```
 

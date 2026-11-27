@@ -4,7 +4,7 @@
   const { $, esc, extLink, ICON, fillSelect, fact, chipsHtml, nextSort, markSort, actions } = window.RC;
 
   const DATA = (window.EXPERT_DATA || []).slice();
-  const PHASES = ['Gründen', 'Finanzieren', 'Wachsen', 'Verkaufen'];
+  const PHASES = ['Gründung', 'Finanzierung', 'Wachstum', 'Exit'];
   const ROLES = [...new Set(DATA.flatMap(e => e.roles))].sort((a, b) => a.localeCompare(b, 'de'));
   const FIELDS = [...new Set(DATA.flatMap(e => e.fields))].sort((a, b) => a.localeCompare(b, 'de'));
   const CITIES = [...new Set(DATA.map(e => e.city).filter(Boolean))].sort((a, b) => a.localeCompare(b, 'de'));
@@ -40,7 +40,10 @@
   }
 
   // ───────── Bausteine ─────────
-  const contact = e => '<div class="flex flex-wrap gap-1">' + (e.linkedin ? extLink(e.linkedin, 'icon-btn', ICON.li, 'LinkedIn: ' + e.name) : '') + '</div>';
+  // Rolle steht in der Box, wie der Fokus auf der Kapital-Seite: danach filtern die Schnellfilter
+  const roleTags = e => e.roles.map(r => '<span class="tag">' + esc(r) + '</span>').join('');
+  const contact = e => '<div class="flex flex-wrap gap-1">' +
+    (e.linkedin ? extLink(e.linkedin, 'icon-btn', ICON.li, 'LinkedIn: ' + e.name) : '') + '</div>';
 
   function details(e) {
     return '<div class="grid grid-cols-12 gap-x-8 gap-y-8 py-8 text-sm cursor-default">' +
@@ -100,8 +103,8 @@
       return '<tr data-toggle="' + esc(e.id) + '" class="cursor-pointer border-b border-ink/20 align-top hover:bg-ink/5 ' + (open ? 'open' : '') + '">' +
           '<td class="py-4 pr-4"><div class="text-base font-bold leading-tight tracking-tight">' + esc(e.name) + '</div>' +
             '<div class="mt-1 text-xs text-ink/55">' + esc([e.city, e.country].filter(Boolean).join(', ')) + (e.firm ? ' · ' + esc(e.firm) : '') + '</div></td>' +
-          '<td class="py-4 pr-4">' + esc(e.roles.join(' & ')) + '</td>' +
-          '<td class="py-4 pr-4"><span class="tag">' + esc(e.fields.join(', ')) + '</span></td>' +
+          '<td class="py-4 pr-4"><div class="flex flex-wrap gap-1">' + roleTags(e) + '</div></td>' +
+          '<td class="py-4 pr-4">' + esc(e.fields.join(', ')) + '</td>' +
           '<td class="py-4 pr-4"><span class="font-mono text-xs">' + e.phases.map(esc).join(' / ') + '</span></td>' +
           '<td class="py-4 pr-4">' + contact(e) + '</td>' +
           '<td class="py-4 text-right font-mono text-lg leading-none"><span class="toggle-sign" aria-hidden="true"></span></td></tr>' +
@@ -113,10 +116,10 @@
       return '<article class="border-b border-ink/20 py-5 ' + (open ? 'open' : '') + '">' +
           '<div class="flex cursor-pointer items-start justify-between gap-4" data-toggle="' + esc(e.id) + '">' +
             '<div class="min-w-0"><p class="text-lg font-bold leading-tight tracking-tight">' + esc(e.name) + '</p>' +
-              '<p class="mt-1 text-xs text-ink/55">' + esc(e.roles.join(' & ')) + ' · ' + esc(e.city) + '</p></div>' +
+              '<p class="mt-1 text-xs text-ink/55">' + esc([e.city, e.country].filter(Boolean).join(', ')) + '</p></div>' +
             '<span class="toggle-sign font-mono text-xl leading-none" aria-hidden="true"></span>' +
           '</div>' +
-          '<div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs"><span class="tag">' + esc(e.fields.join(', ')) + '</span><span class="font-mono">' + e.phases.map(esc).join(' / ') + '</span></div>' +
+          '<div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">' + roleTags(e) + '<span>' + esc(e.fields.join(', ')) + '</span><span class="font-mono">' + e.phases.map(esc).join(' / ') + '</span></div>' +
           '<div class="mt-3">' + contact(e) + '</div>' +
           (open ? '<div class="mt-2 border-t border-ink">' + details(e) + '</div>' : '') +
         '</article>';

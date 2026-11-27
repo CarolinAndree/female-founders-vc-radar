@@ -48,9 +48,8 @@ body { font-family: 'DM Sans', system-ui, sans-serif; background: rgb(var(--pape
   .icon-btn { @apply inline-flex h-8 w-8 items-center justify-center border border-ink/30 hover:border-ink hover:bg-ink hover:text-paper; }
   /* Markierung für die Fokus-Kategorie */
   .mark { @apply inline-block h-2.5 w-2.5 shrink-0; }
-  .mark-exklusiv { @apply bg-accent; }
-  .mark-lens { @apply border border-ink bg-ink; }
-  .mark-diversity { @apply border border-ink; }
+  .mark-nur { @apply bg-accent; }
+  .mark-quote { @apply border border-ink bg-ink; }
 }
 
 /* Pfeil für Auswahlfelder, nur mit CSS gezeichnet (kein Bild, CSP-konform) */

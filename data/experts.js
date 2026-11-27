@@ -5,10 +5,10 @@
 // Felder:
 //   roles:   z. B. ["Rechtsanwältin", "Notarin"]
 //   fields:  Fachgebiete
-//   phases:  "Gründen" | "Finanzieren" | "Wachsen" | "Verkaufen"
+//   phases:  "Gründung" | "Finanzierung" | "Wachstum" | "Exit"
 //   firm:    Kanzlei / Firma, leer lassen, solange nicht bestätigt
 
-window.EXPERTS_UPDATED = "2026-11-26";
+window.EXPERTS_UPDATED = "2026-11-27";
 
 window.EXPERT_DATA = [
   {
@@ -16,7 +16,7 @@ window.EXPERT_DATA = [
     name: "Dr. Andrea Reichert-Clauss",
     roles: ["Rechtsanwältin", "Notarin"],
     fields: ["M&A"],
-    phases: ["Finanzieren", "Verkaufen"],
+    phases: ["Finanzierung", "Exit"],
     city: "Berlin",
     country: "Deutschland",
     firm: "",

@@ -10,13 +10,19 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="Female Founders VC Radar">
   <meta property="og:description" content="VC-Fonds, Angel-Netzwerke, Programme und Expertinnen für Gründerinnen: Deutschland, Europa und weltweit. Mit Phase, Region, Kriterium und Ansprechpartner:innen.">
-  <meta property="og:url" content="https://carolinandree.github.io/female-founders-vc-radar/">
+  <meta property="og:url" content="https://gruenderinnen-radar.de/">
   <meta property="og:locale" content="de_DE">
-  <link rel="canonical" href="https://carolinandree.github.io/female-founders-vc-radar/">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261126c">
+  <meta property="og:site_name" content="Gründerinnen-Radar">
+  <meta property="og:image" content="https://gruenderinnen-radar.de/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Kapital für Gründerinnen. Female Founders VC Radar, gruenderinnen-radar.de">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://gruenderinnen-radar.de/">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261128c">
   <!-- Alles lokal: keine Anfragen an Google, CDNs oder andere fremde Server -->
-  <link rel="stylesheet" href="assets/app.css?v=20261126c">
-  <script src="assets/theme.js?v=20261126c"></script>
+  <link rel="stylesheet" href="assets/app.css?v=20261128c">
+  <script src="assets/theme.js?v=20261128c"></script>
 </head>
 <body class="min-h-screen antialiased">
 
@@ -50,21 +56,21 @@
       </div>
 
       <figure class="col-span-12 lg:col-span-5 lg:self-end" aria-labelledby="gapCaption">
-        <p class="label">Wagniskapital Deutschland 2025</p>
-        <p class="mt-3 font-mono text-[88px] font-semibold leading-none tracking-tight text-accent">1&nbsp;%</p>
+        <p class="label">Beteiligungskapital Europa 2024</p>
+        <p class="mt-3 font-mono text-[88px] font-semibold leading-none tracking-tight text-accent">2,5&nbsp;%</p>
         <p class="mt-2 text-sm text-ink/75">ging an rein weibliche Gründungsteams.</p>
-        <!-- Vergleichsbalken: 94 % männlich, Rest gemischt, 1 % weiblich -->
-        <div class="mt-8 flex h-8 w-full border border-ink" role="img" aria-label="94 Prozent rein männliche Teams, etwa 5 Prozent gemischte Teams, 1 Prozent rein weibliche Teams">
-          <div class="h-full w-[94%] bg-ink/15"></div>
-          <div class="h-full w-[5%] border-l border-ink bg-ink/45"></div>
+        <!-- Vergleichsbalken: 2,5 % weiblich, unter 10 % gemischt, Rest männlich -->
+        <div class="mt-8 flex h-8 w-full border border-ink" role="img" aria-label="Rund 88 Prozent rein männliche Teams, unter 10 Prozent gemischte Teams, 2,5 Prozent rein weibliche Teams">
+          <div class="h-full w-[88%] bg-ink/15"></div>
+          <div class="h-full w-[9.5%] border-l border-ink bg-ink/45"></div>
           <div class="h-full min-w-[6px] flex-1 border-l border-ink bg-accent"></div>
         </div>
         <dl class="mt-3 grid grid-cols-3 gap-4 font-mono text-[11px] uppercase tracking-[0.08em]">
-          <div><dt class="text-ink/55">Männlich</dt><dd class="mt-1 text-base font-semibold normal-case tracking-normal">94&nbsp;%</dd></div>
-          <div><dt class="text-ink/55">Gemischt</dt><dd class="mt-1 text-base font-semibold normal-case tracking-normal">ca. 5&nbsp;%</dd></div>
-          <div><dt class="text-accent">Weiblich</dt><dd class="mt-1 text-base font-semibold normal-case tracking-normal text-accent">1&nbsp;%</dd></div>
+          <div><dt class="text-ink/55">Männlich</dt><dd class="mt-1 text-base font-semibold normal-case tracking-normal">ca. 88&nbsp;%</dd></div>
+          <div><dt class="text-ink/55">Gemischt</dt><dd class="mt-1 text-base font-semibold normal-case tracking-normal">unter 10&nbsp;%</dd></div>
+          <div><dt class="text-accent">Weiblich</dt><dd class="mt-1 text-base font-semibold normal-case tracking-normal text-accent">2,5&nbsp;%</dd></div>
         </dl>
-        <figcaption id="gapCaption" class="mt-4 text-xs text-ink/55">Quelle: <a href="https://www.ey.com/de_de/newsroom/2026/03/ey-startup-barometer-2026-gruenderinnen-und-gruender" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 hover:text-accent">EY Startup-Barometer 2026</a>. Gemischte Teams: Rest der Summe.</figcaption>
+        <figcaption id="gapCaption" class="mt-4 text-xs text-ink/55">Quelle: <a href="https://op.europa.eu/en/publication-detail/-/publication/44c1e585-272f-11f1-a7dd-01aa75ed71a1" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 hover:text-accent">EU-Kommission, Taking action on gender-conscious investment in Europe (2026)</a></figcaption>
       </figure>
     </section>
 
@@ -85,7 +91,7 @@
       </div>
 
       <div class="mt-5 flex flex-wrap items-center gap-2" aria-label="Schnellfilter">
-        <button type="button" class="pill" data-action="toggleFlag" data-arg="exclusive" id="pillExclusive"><span class="mark mark-exklusiv"></span>Nur Gründerinnen</button>
+        <button type="button" class="pill" data-action="toggleFlag" data-arg="exclusive" id="pillExclusive"><span class="mark mark-nur"></span>Nur Gründerinnen</button>
         <button type="button" class="pill" data-action="toggleFlag" data-arg="email" id="pillEmail">Mit E-Mail</button>
         <span class="mx-1 hidden h-5 border-l border-ink/30 sm:block" aria-hidden="true"></span>
         <button type="button" class="pill" data-action="setRegion" data-arg="Deutschland">Deutschland</button>
@@ -163,7 +169,7 @@
         <section class="grid gap-x-8 gap-y-3 border-t border-ink py-6 sm:grid-cols-[8rem_1fr]">
           <p class="label">01 Warum?</p>
           <div class="space-y-5">
-            <p class="leading-relaxed">Laut <a href="https://www.ey.com/de_de/newsroom/2026/03/ey-startup-barometer-2026-gruenderinnen-und-gruender" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 hover:text-accent">EY Startup-Barometer</a> flossen 2025 in Deutschland rund 94&nbsp;% des Wagniskapitals an rein männliche Gründungsteams. Rein weibliche Teams erhielten nur etwa 1&nbsp;%: 53 Mio. € von insgesamt 7,8 Mrd. €.</p>
+            <p class="leading-relaxed">Laut <a href="https://www.ey.com/de_de/newsroom/2026/03/ey-startup-barometer-2026-gruenderinnen-und-gruender" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 hover:text-accent">EY Startup-Barometer</a> flossen 2025 in Deutschland rund 94&nbsp;% des Wagniskapitals an rein männliche Gründungsteams. Rein weibliche Teams erhielten nur etwa 1&nbsp;%: 53 Mio. € von insgesamt 7,8 Mrd. €. Damit liegt Deutschland sogar unter dem europäischen Schnitt: Europaweit gingen 2024 immerhin 2,5&nbsp;% an rein weibliche Teams.</p>
             <div class="grid grid-cols-2 border border-ink">
               <div class="border-r border-ink p-4"><p class="font-mono text-4xl font-semibold">94&nbsp;%</p><p class="label mt-2">Rein männliche Teams</p></div>
               <div class="p-4"><p class="font-mono text-4xl font-semibold text-accent">1&nbsp;%</p><p class="label mt-2">Rein weibliche Teams</p></div>
@@ -174,7 +180,7 @@
         <section class="grid gap-x-8 gap-y-3 border-t border-ink py-6 sm:grid-cols-[8rem_1fr]">
           <p class="label">02 Fokus</p>
           <div class="space-y-4 leading-relaxed">
-            <p>Der Radar bildet eine kuratierte Liste von VC-Fonds, Angel-Netzwerken und Programmen, die in Gründerinnen investieren oder stark darauf achten, dass Frauen im Gründungsteam sind. Es zählt, wer gründet und wer entscheidet, nicht nur das Thema. Jeder Eintrag ist öffentlich belegt.</p>
+            <p>Der Radar ist eine kuratierte Liste von VC-Fonds, Angel-Netzwerken und Programmen, die nachweislich in Gründerinnen investieren: entweder ausschließlich oder mit einer belegten Quote von mindestens 30&nbsp;%. Es zählt, wer gründet, nicht das Thema. Jeder Eintrag ist öffentlich belegt.</p>
             <p>Zusätzlich gibt es eine Liste von <a href="expertinnen.html" class="underline underline-offset-4 hover:text-accent">Expertinnen</a>. Denn neben der Finanzierung gibt es viele weitere Themen, die für Startups entscheidend sind: Verträge, Notariat und Exit.</p>
           </div>
         </section>
@@ -184,10 +190,10 @@
           <div>
             <p class="label mb-2">Fokus</p>
             <dl class="border-t border-ink/20 text-sm">
-              <div class="grid gap-1 border-b border-ink/20 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"><dt class="flex items-center gap-2 font-semibold"><span class="mark mark-exklusiv"></span>Exklusiv Gründerinnen</dt><dd class="text-ink/75">investiert nur, wenn (mind.) eine Gründerin im Team ist</dd></div>
-              <div class="grid gap-1 border-b border-ink/20 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"><dt class="flex items-center gap-2 font-semibold"><span class="mark mark-lens"></span>Bevorzugt Frauen</dt><dd class="text-ink/75">Frauen entscheiden als Investorinnen, oder Gründerinnen werden klar bevorzugt, aber ohne feste Regel</dd></div>
-              <div class="grid gap-1 border-b border-ink/20 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"><dt class="flex items-center gap-2 font-semibold"><span class="mark mark-diversity"></span>Diversity</dt><dd class="text-ink/75">unterrepräsentierte Gründer:innen allgemein, inkl. Frauen</dd></div>
+              <div class="grid gap-1 border-b border-ink/20 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"><dt class="flex items-center gap-2 font-semibold"><span class="mark mark-nur"></span>Nur Gründerinnen</dt><dd class="text-ink/75">investiert nur, wenn mindestens eine Frau zum Gründungsteam gehört</dd></div>
+              <div class="grid gap-1 border-b border-ink/20 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"><dt class="flex items-center gap-2 font-semibold"><span class="mark mark-quote"></span>Gründerinnen-Quote</dt><dd class="text-ink/75">mindestens 30&nbsp;% der Unternehmen im Portfolio haben eine Gründerin, öffentlich belegt</dd></div>
             </dl>
+            <p class="mt-4 text-sm leading-relaxed text-ink/75">30&nbsp;% gilt als kritische Masse: Ab diesem Anteil ist eine Gruppe keine Ausnahme mehr, sondern prägt die Kultur mit. Zum Vergleich: 2024 ging in Europa nicht einmal jeder achte investierte Euro an Teams mit Gründerin (<a href="https://op.europa.eu/en/publication-detail/-/publication/44c1e585-272f-11f1-a7dd-01aa75ed71a1" target="_blank" rel="noopener noreferrer" class="underline underline-offset-4 hover:text-accent">EU-Kommission</a>). Fonds, die nur allgemein „Diversity“ versprechen, ohne eine Quote zu belegen, und Netzwerke, die nicht selbst investieren, nehmen wir nicht auf.</p>
             <p class="label mb-2 mt-6">Art</p>
             <dl class="border-t border-ink/20 text-sm">
               <div class="grid gap-1 border-b border-ink/20 py-2.5 sm:grid-cols-[11rem_1fr] sm:gap-4"><dt class="font-semibold">VC-Fonds</dt><dd class="text-ink/75">investiert Eigenkapital aus einem Fonds</dd></div>
@@ -212,8 +218,8 @@
     </div>
   </div>
 
-  <script src="data/vcs.js?v=20261126c"></script>
-  <script src="assets/common.js?v=20261126c"></script>
-  <script src="assets/app.js?v=20261126c"></script>
+  <script src="data/vcs.js?v=20261128c"></script>
+  <script src="assets/common.js?v=20261128c"></script>
+  <script src="assets/app.js?v=20261128c"></script>
 </body>
 </html>
