@@ -87,7 +87,7 @@
     markSort(state.sort);
     $('chips').innerHTML = chipsHtml(activeFilters());
 
-    $('emptyState').classList.toggle('hidden', list.length > 0);
+    $('emptyState').hidden = list.length > 0;
     $('tableWrap').classList.toggle('md:block', list.length > 0);
     $('mobileList').classList.toggle('hidden', list.length === 0);
 
