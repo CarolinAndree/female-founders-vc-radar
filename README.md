@@ -74,11 +74,11 @@ python3 -m http.server 3344
 
 ## Daten pflegen
 
-Alle Einträge stehen in [`data/vcs.js`](data/vcs.js). Neuen Eintrag anlegen: vorhandenen Block kopieren und anpassen.
+Alle Einträge stehen in [`data/vcs.js`](data/vcs.js). Neuen Eintrag anlegen: vorhandenen Block kopieren und anpassen. Danach `npm run build` ausführen (siehe [Entwicklung](#entwicklung)).
 
 Regeln für Einträge:
 
-- **Es zählt, wer gründet und wer entscheidet:** Fonds, die nur in Frauen-Themen investieren (z. B. Women's Health), ohne Gründerinnen zu bevorzugen, werden nicht aufgenommen.
+- **Es zählt, wer gründet, nicht das Thema:** Aufgenommen wird nur, wer ausschließlich in Teams mit Gründerin investiert oder eine Gründerinnen-Quote von mindestens 30 % öffentlich belegt. Fonds, die nur in Frauen-Themen investieren (z. B. Women's Health), und Netzwerke, die nicht selbst investieren, werden nicht aufgenommen.
 - **Quelle angeben:** Die Angaben müssen öffentlich überprüfbar sein (Website des Fonds, Pressemitteilung, Fachpresse).
 - **E-Mail** nur, wenn sie öffentlich auf der Website des Fonds steht.
 - **LinkedIn-Profil** nur, wenn es eindeutig zur Person gehört, sonst weglassen, die Seite erzeugt dann eine Suche.
@@ -102,28 +102,35 @@ Anwältinnen, Notarinnen und Beraterinnen für Gründung, Finanzierung und Exit 
 ├── data/vcs.js         Alle Fonds & Programme (hier pflegen)
 ├── data/experts.js     Expertinnen (nur mit Einwilligung)
 ├── assets/
-│   ├── common.js       Gemeinsame Bausteine (Links, Icons, Filter-Chips, Über-Blatt)
+│   ├── render.js       Zeichnet Einträge aus den Daten (Browser und Build)
+│   ├── common.js       Seiten-Helfer (Filter-Chips, Sortierung, Kopieren, Über-Blatt)
 │   ├── app.js          Logik Kapital-Radar (Filter, Suche, Sortierung, Export)
 │   ├── expertinnen.js  Logik Expertinnen-Seite
 │   ├── theme.js        Hell/Dunkel nach Systemeinstellung
 │   ├── app.css         Gebautes CSS (Tailwind)
 │   ├── fonts/          DM Sans, JetBrains Mono
 │   └── img/            Porträt, Vorschaubild für Links (og.png)
+├── scripts/prerender.js  Schreibt die Einträge beim Build fertig ins HTML
 └── src/input.css       Quelle für assets/app.css
 ```
 
 ## Entwicklung
 
-Das CSS ist vorgebaut. Nur wenn du **neue Tailwind-Klassen** im HTML verwendest, musst du neu bauen (Node.js nötig):
+Nach **jeder Änderung an Daten, JavaScript oder CSS** neu bauen (Node.js nötig):
 
 ```bash
 npm install
 npm run build
 ```
 
-Neue Fonds in `data/vcs.js` brauchen keinen Neubau.
+`npm run build` macht zwei Dinge:
 
-Nach Änderungen an CSS, JavaScript oder Daten die Versionsnummer `?v=…` in den vier HTML-Dateien erhöhen (z. B. auf das aktuelle Datum). Dann laden Browser die neue Fassung statt einer zwischengespeicherten.
+1. **Vorrendern** (`scripts/prerender.js`): schreibt alle Einträge als fertiges HTML in `index.html` und `expertinnen.html`, zwischen die Markierungen `<!-- prerender:… -->`. So sehen Suchmaschinen, KI-Crawler und Link-Vorschauen die Liste auch ohne JavaScript. Den Bereich zwischen den Markierungen nicht von Hand bearbeiten.
+2. **CSS bauen** (Tailwind) nach `assets/app.css`.
+
+Browser und Build nutzen dieselben Bausteine aus `assets/render.js`. Im Browser übernimmt danach JavaScript (Filter, Suche, Sortierung, Aufklappen, Export).
+
+Danach die Versionsnummer `?v=…` in den vier HTML-Dateien erhöhen (z. B. auf das aktuelle Datum). Dann laden Browser die neue Fassung statt einer zwischengespeicherten.
 
 ## Veröffentlichen
 

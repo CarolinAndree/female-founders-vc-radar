@@ -1,7 +1,9 @@
-// Seite „Kapital“: VC-Fonds, Angel-Netzwerke, Programme. Nutzt die Bausteine aus common.js.
+// Seite „Kapital“: VC-Fonds, Angel-Netzwerke, Programme.
+// Zeichnen: render.js (RV), Seiten-Helfer: common.js (RC).
 (function () {
   'use strict';
-  const { $, esc, liSearch, liCompany, host, extLink, ICON, fillSelect, fact, chipsHtml, nextSort, markSort, actions } = window.RC;
+  const { FOCUS_MARK, vcRow, vcCard, vcCount } = window.RV;
+  const { $, fillSelect, chipsHtml, nextSort, markSort, actions } = window.RC;
 
   const DATA = (window.VC_DATA || []).slice();
   const STAGES = ['Pre-Seed', 'Seed', 'Series A', 'Growth'];
@@ -9,8 +11,6 @@
     ALL: 'Alle', Deutschland: 'Deutschland', Europa: 'Europa (ohne DE)', WORLD: 'Rest der Welt',
     Nordamerika: 'Nordamerika', 'Asien-Pazifik': 'Asien-Pazifik', Afrika: 'Afrika', Weltweit: 'Weltweit (global)'
   };
-  // Fokus-Kategorie als typografische Markierung statt Farbfläche
-  const FOCUS_MARK = { 'Nur Gründerinnen': 'mark-nur', 'Gründerinnen-Quote': 'mark-quote' };
 
   const state = { region: 'ALL', flags: { exclusive: false, email: false }, sort: { key: null, dir: 1 }, open: new Set(), advanced: false };
 
@@ -53,66 +53,6 @@
     return list.slice().sort((a, b) => (v(a) > v(b) ? 1 : v(a) < v(b) ? -1 : 0) * dir);
   }
 
-  // ───────── Bausteine ─────────
-  const focusTag = d => '<span class="tag"><span class="mark ' + (FOCUS_MARK[d.focus] || '') + '"></span>' + esc(d.focus) + '</span>';
-  const stageText = d => '<span class="font-mono text-xs">' + d.stages.map(esc).join(' / ') + '</span>';
-
-  function contactIcons(d) {
-    let h = extLink(d.website, 'icon-btn', ICON.web, 'Website: ' + host(d.website));
-    if (d.email) {
-      h += extLink('mailto:' + d.email, 'icon-btn', ICON.mail, 'E-Mail an ' + d.email);
-      h += '<button type="button" class="icon-btn" data-copy="' + esc(d.email) + '" title="E-Mail kopieren" aria-label="E-Mail ' + esc(d.email) + ' kopieren">' + ICON.copy + '</button>';
-    }
-    const p = (d.people || [])[0];
-    h += p
-      ? extLink(p.linkedin || liSearch(p.name + ' ' + d.name), 'icon-btn', ICON.li, 'LinkedIn: ' + p.name)
-      : extLink(liCompany(d.name), 'icon-btn', ICON.li, 'LinkedIn-Suche: ' + d.name);
-    return '<div class="flex flex-wrap gap-1">' + h + '</div>';
-  }
-
-  // Aufgeklappter Eintrag: Editorial-Layout aus Text-, Fakten- und Personenspalte
-  function details(d) {
-    const people = (d.people || []).length
-      ? d.people.map(p =>
-          '<li class="border-t border-ink/20 py-2.5">' +
-            extLink(p.linkedin || liSearch(p.name + ' ' + d.name), 'font-semibold hover:text-accent', esc(p.name) + ' ↗') +
-            '<div class="label mt-1 normal-case tracking-normal">' + esc(p.role) + (p.linkedin ? '' : ' · LinkedIn-Suche') + '</div>' +
-          '</li>').join('')
-      : '<li class="border-t border-ink/20 py-2.5 text-ink/60">Keine Person hinterlegt. ' + extLink(liCompany(d.name), 'underline underline-offset-4 hover:text-accent', 'Auf LinkedIn suchen ↗') + '</li>';
-
-    return '<div class="grid grid-cols-12 gap-x-8 gap-y-8 py-8 text-sm cursor-default">' +
-      '<div class="col-span-12 lg:col-span-5">' +
-        '<p class="label mb-3">Über</p>' +
-        (d.description ? '<p class="text-lg leading-relaxed">' + esc(d.description) + '</p>' : '') +
-        '<div class="mt-6 border border-accent p-4">' +
-          '<p class="label text-accent">Investment-Kriterium</p>' +
-          '<p class="mt-2 text-base font-semibold leading-snug">' + esc(d.criterion) + '</p>' +
-        '</div>' +
-        '<div class="mt-6 flex flex-wrap gap-2">' +
-          extLink(d.website, 'btn btn-accent', esc(host(d.website)) + ' ↗') +
-          (d.contactUrl ? extLink(d.contactUrl, 'btn', 'Kontakt / Pitch ↗') : '') +
-        '</div>' +
-      '</div>' +
-      '<div class="col-span-12 sm:col-span-7 lg:col-span-4">' +
-        '<p class="label mb-3">Eckdaten</p>' +
-        '<dl class="border-b border-ink/20">' +
-          fact('Standort', esc([d.city, d.country].filter(Boolean).join(', '))) +
-          fact('Art', esc(d.type)) +
-          fact('Gründerinnen-Quote', esc(d.quota)) +
-          fact('Phase', esc(d.stages.join(' / '))) +
-          fact('Branchen', esc(d.sectors)) +
-          fact('Ticket', esc(d.ticket)) +
-          fact('Fondsgröße', esc(d.fundSize)) +
-          fact('E-Mail', d.email ? extLink('mailto:' + d.email, 'font-mono text-xs underline underline-offset-4 break-all hover:text-accent', esc(d.email)) : '') +
-        '</dl>' +
-      '</div>' +
-      '<div class="col-span-12 sm:col-span-5 lg:col-span-3">' +
-        '<p class="label mb-3">Ansprechpartner:innen</p>' +
-        '<ul class="border-b border-ink/20">' + people + '</ul>' +
-      '</div>' +
-    '</div>';
-  }
-
   function activeFilters() {
     const out = [];
     const q = $('searchInput').value.trim();
@@ -136,7 +76,7 @@
     const list = sortList(applyFlags(baseFiltered(false)));
 
     $('statTotal').textContent = list.length;
-    $('statLabel').textContent = (list.length === 1 ? 'Eintrag' : 'Einträge') + ' gefunden' + (list.length === DATA.length ? '' : ' von ' + DATA.length);
+    $('statLabel').textContent = vcCount(list.length, DATA.length);
     $('pillExclusive').classList.toggle('is-active', state.flags.exclusive);
     $('pillEmail').classList.toggle('is-active', state.flags.email);
     document.querySelectorAll('[data-action="setRegion"]').forEach(b => b.classList.toggle('is-active', state.region === b.dataset.arg));
@@ -151,32 +91,8 @@
     $('tableWrap').classList.toggle('md:block', list.length > 0);
     $('mobileList').classList.toggle('hidden', list.length === 0);
 
-    $('tbody').innerHTML = list.map(d => {
-      const open = state.open.has(d.id);
-      return '<tr data-toggle="' + esc(d.id) + '" class="cursor-pointer border-b border-ink/20 align-top hover:bg-ink/5 ' + (open ? 'open' : '') + '">' +
-          '<td class="py-4 pr-4"><div class="text-base font-bold leading-tight tracking-tight">' + esc(d.name) + '</div>' +
-            '<div class="mt-1 text-xs text-ink/55">' + esc([d.city, d.country].filter(Boolean).join(', ') || d.region) + ' · ' + esc(d.type) + '</div></td>' +
-          '<td class="py-4 pr-4">' + focusTag(d) + '</td>' +
-          '<td class="py-4 pr-4">' + stageText(d) + '</td>' +
-          '<td class="py-4 pr-4 max-w-[200px] text-xs">' + (esc(d.ticket) || '<span class="text-ink/35">k. A.</span>') + '</td>' +
-          '<td class="py-4 pr-4">' + contactIcons(d) + '</td>' +
-          '<td class="py-4 text-right font-mono text-lg leading-none"><span class="toggle-sign" aria-hidden="true"></span></td></tr>' +
-        (open ? '<tr class="border-b border-ink"><td colspan="6">' + details(d) + '</td></tr>' : '');
-    }).join('');
-
-    $('mobileList').innerHTML = list.map(d => {
-      const open = state.open.has(d.id);
-      return '<article class="border-b border-ink/20 py-5 ' + (open ? 'open' : '') + '">' +
-          '<div class="flex cursor-pointer items-start justify-between gap-4" data-toggle="' + esc(d.id) + '">' +
-            '<div class="min-w-0"><p class="text-lg font-bold leading-tight tracking-tight">' + esc(d.name) + '</p>' +
-              '<p class="mt-1 text-xs text-ink/55">' + esc([d.city, d.country].filter(Boolean).join(', ')) + ' · ' + esc(d.type) + '</p></div>' +
-            '<span class="toggle-sign font-mono text-xl leading-none" aria-hidden="true"></span>' +
-          '</div>' +
-          '<div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">' + focusTag(d) + stageText(d) + '</div>' +
-          '<div class="mt-3">' + contactIcons(d) + '</div>' +
-          (open ? '<div class="mt-2 border-t border-ink">' + details(d) + '</div>' : '') +
-        '</article>';
-    }).join('');
+    $('tbody').innerHTML = list.map(d => vcRow(d, state.open.has(d.id))).join('');
+    $('mobileList').innerHTML = list.map(d => vcCard(d, state.open.has(d.id))).join('');
   }
 
   // ───────── Aktionen ─────────

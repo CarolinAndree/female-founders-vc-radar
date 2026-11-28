@@ -4,7 +4,8 @@
   "private": true,
   "description": "VCs, Angel-Netzwerke und Programme, die in Gründerinnen investieren",
   "scripts": {
-    "build": "tailwindcss -c tailwind.config.js -i src/input.css -o assets/app.css --minify",
+    "build": "node scripts/prerender.js && tailwindcss -c tailwind.config.js -i src/input.css -o assets/app.css --minify",
+    "prerender": "node scripts/prerender.js",
     "watch": "tailwindcss -c tailwind.config.js -i src/input.css -o assets/app.css --watch",
     "start": "python3 -m http.server 3344"
   },

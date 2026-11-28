@@ -19,10 +19,10 @@
   <meta property="og:image:alt" content="Kapital für Gründerinnen. Female Founders VC Radar, gruenderinnen-radar.de">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="canonical" href="https://gruenderinnen-radar.de/expertinnen.html">
-  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261128c">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=20261128d">
   <!-- Alles lokal: keine Anfragen an Google, CDNs oder andere fremde Server -->
-  <link rel="stylesheet" href="assets/app.css?v=20261128c">
-  <script src="assets/theme.js?v=20261128c"></script>
+  <link rel="stylesheet" href="assets/app.css?v=20261128d">
+  <script src="assets/theme.js?v=20261128d"></script>
 </head>
 <body class="min-h-screen antialiased">
 
@@ -34,7 +34,7 @@
         <span class="hidden font-mono text-[11px] uppercase tracking-[0.12em] sm:inline">Female Founders VC Radar</span>
       </a>
       <nav class="flex items-center gap-2" aria-label="Hauptnavigation">
-        <span class="label mr-2 hidden lg:inline" id="updatedText"></span>
+        <span class="label mr-2 hidden lg:inline" id="updatedText"><!-- prerender:updated -->Stand 27.11.2026<!-- /prerender:updated --></span>
         <a href="index.html" class="btn">Kapital</a>
         <a href="expertinnen.html" class="btn is-active" aria-current="page">Expertinnen</a>
         <a href="index.html#ueber" class="btn">Über</a>
@@ -82,12 +82,13 @@
 
     <!-- Ergebniszeile -->
     <section class="py-5" aria-label="Ergebnis">
-      <p aria-live="polite"><span id="statTotal" class="font-mono text-2xl font-semibold">0</span> <span id="statLabel" class="text-ink/70">Expertinnen</span></p>
+      <p aria-live="polite"><span id="statTotal" class="font-mono text-2xl font-semibold"><!-- prerender:total -->1<!-- /prerender:total --></span> <span id="statLabel" class="text-ink/70"><!-- prerender:label -->Expertin<!-- /prerender:label --></span></p>
       <div id="chips" class="mt-3 flex flex-wrap gap-2"></div>
     </section>
 
     <!-- Liste: Handy -->
-    <div id="mobileList" class="border-t border-ink md:hidden"></div>
+    <!-- Die Einträge zwischen den prerender-Markierungen schreibt „npm run build“ (scripts/prerender.js). Nicht von Hand bearbeiten. -->
+    <div id="mobileList" class="border-t border-ink md:hidden"><!-- prerender:cards --><article class="border-b border-ink/20 py-5 "><div class="flex cursor-pointer items-start justify-between gap-4" data-toggle="andrea-reichert-clauss"><div class="min-w-0"><p class="text-lg font-bold leading-tight tracking-tight">Dr. Andrea Reichert-Clauss</p><p class="mt-1 text-xs text-ink/55">Berlin, Deutschland</p></div><span class="toggle-sign font-mono text-xl leading-none" aria-hidden="true"></span></div><div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs"><span class="tag">Rechtsanwältin</span><span class="tag">Notarin</span><span>M&amp;A</span><span class="font-mono text-xs">Finanzierung / Exit</span></div><div class="mt-3"><div class="flex flex-wrap gap-1"><a href="https://www.linkedin.com/in/dr-andrea-reichert-clauss-357734a/" target="_blank" rel="noopener noreferrer" title="LinkedIn: Dr. Andrea Reichert-Clauss" aria-label="LinkedIn: Dr. Andrea Reichert-Clauss" class="icon-btn"><span class="font-mono text-[11px] font-semibold leading-none" aria-hidden="true">in</span></a></div></div></article><!-- /prerender:cards --></div>
 
     <!-- Liste: Desktop -->
     <div id="tableWrap" class="hidden md:block">
@@ -102,7 +103,7 @@
             <th class="w-8 py-3"><span class="sr-only">Aufklappen</span></th>
           </tr>
         </thead>
-        <tbody id="tbody"></tbody>
+        <tbody id="tbody"><!-- prerender:rows --><tr data-toggle="andrea-reichert-clauss" class="cursor-pointer border-b border-ink/20 align-top hover:bg-ink/5 "><td class="py-4 pr-4"><div class="text-base font-bold leading-tight tracking-tight">Dr. Andrea Reichert-Clauss</div><div class="mt-1 text-xs text-ink/55">Berlin, Deutschland</div></td><td class="py-4 pr-4"><div class="flex flex-wrap gap-1"><span class="tag">Rechtsanwältin</span><span class="tag">Notarin</span></div></td><td class="py-4 pr-4">M&amp;A</td><td class="py-4 pr-4"><span class="font-mono text-xs">Finanzierung / Exit</span></td><td class="py-4 pr-4"><div class="flex flex-wrap gap-1"><a href="https://www.linkedin.com/in/dr-andrea-reichert-clauss-357734a/" target="_blank" rel="noopener noreferrer" title="LinkedIn: Dr. Andrea Reichert-Clauss" aria-label="LinkedIn: Dr. Andrea Reichert-Clauss" class="icon-btn"><span class="font-mono text-[11px] font-semibold leading-none" aria-hidden="true">in</span></a></div></td><td class="py-4 text-right font-mono text-lg leading-none"><span class="toggle-sign" aria-hidden="true"></span></td></tr><!-- /prerender:rows --></tbody>
       </table>
     </div>
 
@@ -125,8 +126,9 @@
     </div>
   </footer>
 
-  <script src="data/experts.js?v=20261128c"></script>
-  <script src="assets/common.js?v=20261128c"></script>
-  <script src="assets/expertinnen.js?v=20261128c"></script>
+  <script src="data/experts.js?v=20261128d"></script>
+  <script src="assets/render.js?v=20261128d"></script>
+  <script src="assets/common.js?v=20261128d"></script>
+  <script src="assets/expertinnen.js?v=20261128d"></script>
 </body>
 </html>

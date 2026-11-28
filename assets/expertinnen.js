@@ -1,7 +1,9 @@
-// Seite „Expertinnen“: Anwältinnen, Notarinnen, Beraterinnen. Nutzt die Bausteine aus common.js.
+// Seite „Expertinnen“: Anwältinnen, Notarinnen, Beraterinnen.
+// Zeichnen: render.js (RV), Seiten-Helfer: common.js (RC).
 (function () {
   'use strict';
-  const { $, esc, extLink, ICON, fillSelect, fact, chipsHtml, nextSort, markSort, actions } = window.RC;
+  const { esc, expertRow, expertCard, expertCount } = window.RV;
+  const { $, fillSelect, chipsHtml, nextSort, markSort, actions } = window.RC;
 
   const DATA = (window.EXPERT_DATA || []).slice();
   const PHASES = ['Gründung', 'Finanzierung', 'Wachstum', 'Exit'];
@@ -39,35 +41,6 @@
     return list.slice().sort((a, b) => (v(a) > v(b) ? 1 : v(a) < v(b) ? -1 : 0) * dir);
   }
 
-  // ───────── Bausteine ─────────
-  // Rolle steht in der Box, wie der Fokus auf der Kapital-Seite: danach filtern die Schnellfilter
-  const roleTags = e => e.roles.map(r => '<span class="tag">' + esc(r) + '</span>').join('');
-  const contact = e => '<div class="flex flex-wrap gap-1">' +
-    (e.linkedin ? extLink(e.linkedin, 'icon-btn', ICON.li, 'LinkedIn: ' + e.name) : '') + '</div>';
-
-  function details(e) {
-    return '<div class="grid grid-cols-12 gap-x-8 gap-y-8 py-8 text-sm cursor-default">' +
-      '<div class="col-span-12 lg:col-span-5">' +
-        '<p class="label mb-3">Schwerpunkt</p>' +
-        '<p class="text-lg leading-relaxed">' + esc(e.roles.join(' & ')) + ' mit Schwerpunkt ' + esc(e.fields.join(', ')) + '.</p>' +
-        '<div class="mt-6 flex flex-wrap gap-2">' +
-          (e.linkedin ? extLink(e.linkedin, 'btn btn-accent', 'LinkedIn-Profil ↗') : '') +
-        '</div>' +
-      '</div>' +
-      '<div class="col-span-12 lg:col-span-7">' +
-        '<p class="label mb-3">Eckdaten</p>' +
-        '<dl class="border-b border-ink/20">' +
-          fact('Rolle', esc(e.roles.join(', '))) +
-          fact('Fachgebiet', esc(e.fields.join(', '))) +
-          fact('Phase', esc(e.phases.join(' / '))) +
-          fact('Ort', esc([e.city, e.country].filter(Boolean).join(', '))) +
-          fact('Kanzlei', esc(e.firm)) +
-          fact('Auszeichnung', esc(e.recognition)) +
-        '</dl>' +
-      '</div>' +
-    '</div>';
-  }
-
   function activeFilters() {
     const out = [];
     const q = $('searchInput').value.trim();
@@ -85,7 +58,7 @@
     const list = sortList(filtered());
 
     $('statTotal').textContent = list.length;
-    $('statLabel').textContent = (list.length === 1 ? 'Expertin' : 'Expertinnen') + (list.length === DATA.length ? '' : ' von ' + DATA.length);
+    $('statLabel').textContent = expertCount(list.length, DATA.length);
     document.querySelectorAll('[data-action="setRole"]').forEach(b => b.classList.toggle('is-active', state.role === b.dataset.arg));
     $('advFilters').classList.toggle('hidden', !state.advanced);
     $('advFilters').classList.toggle('grid', state.advanced);
@@ -98,32 +71,8 @@
     $('tableWrap').classList.toggle('md:block', list.length > 0);
     $('mobileList').classList.toggle('hidden', list.length === 0);
 
-    $('tbody').innerHTML = list.map(e => {
-      const open = state.open.has(e.id);
-      return '<tr data-toggle="' + esc(e.id) + '" class="cursor-pointer border-b border-ink/20 align-top hover:bg-ink/5 ' + (open ? 'open' : '') + '">' +
-          '<td class="py-4 pr-4"><div class="text-base font-bold leading-tight tracking-tight">' + esc(e.name) + '</div>' +
-            '<div class="mt-1 text-xs text-ink/55">' + esc([e.city, e.country].filter(Boolean).join(', ')) + (e.firm ? ' · ' + esc(e.firm) : '') + '</div></td>' +
-          '<td class="py-4 pr-4"><div class="flex flex-wrap gap-1">' + roleTags(e) + '</div></td>' +
-          '<td class="py-4 pr-4">' + esc(e.fields.join(', ')) + '</td>' +
-          '<td class="py-4 pr-4"><span class="font-mono text-xs">' + e.phases.map(esc).join(' / ') + '</span></td>' +
-          '<td class="py-4 pr-4">' + contact(e) + '</td>' +
-          '<td class="py-4 text-right font-mono text-lg leading-none"><span class="toggle-sign" aria-hidden="true"></span></td></tr>' +
-        (open ? '<tr class="border-b border-ink"><td colspan="6">' + details(e) + '</td></tr>' : '');
-    }).join('');
-
-    $('mobileList').innerHTML = list.map(e => {
-      const open = state.open.has(e.id);
-      return '<article class="border-b border-ink/20 py-5 ' + (open ? 'open' : '') + '">' +
-          '<div class="flex cursor-pointer items-start justify-between gap-4" data-toggle="' + esc(e.id) + '">' +
-            '<div class="min-w-0"><p class="text-lg font-bold leading-tight tracking-tight">' + esc(e.name) + '</p>' +
-              '<p class="mt-1 text-xs text-ink/55">' + esc([e.city, e.country].filter(Boolean).join(', ')) + '</p></div>' +
-            '<span class="toggle-sign font-mono text-xl leading-none" aria-hidden="true"></span>' +
-          '</div>' +
-          '<div class="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">' + roleTags(e) + '<span>' + esc(e.fields.join(', ')) + '</span><span class="font-mono">' + e.phases.map(esc).join(' / ') + '</span></div>' +
-          '<div class="mt-3">' + contact(e) + '</div>' +
-          (open ? '<div class="mt-2 border-t border-ink">' + details(e) + '</div>' : '') +
-        '</article>';
-    }).join('');
+    $('tbody').innerHTML = list.map(e => expertRow(e, state.open.has(e.id))).join('');
+    $('mobileList').innerHTML = list.map(e => expertCard(e, state.open.has(e.id))).join('');
   }
 
   // ───────── Aktionen ─────────
